@@ -1,0 +1,39 @@
+@font-face {
+	font-family: 'WaskNewRegular';
+	src: 	url("/fonts/wask_new-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("/fonts/wask_new-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'WaskNewBold';
+	src: 	url("/fonts/wask_new_bold-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("/fonts/wask_new_bold-webfont.woff") format("woff");
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'WaskNewRegularBoldItalic';
+	src: 	url("/fonts/wask_new_bold_italic-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("/fonts/wask_new_bold_italic-webfont.woff") format("woff");
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'WaskNewRegularItalic';
+	src: 	url("/fonts/wask_new_italic-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("/fonts/wask_new_italic-webfont.woff") format("woff");
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Frenteh1Regular';
+	src: 	url('/fonts/frenteh1-regular-webfont.woff2') format('woff2'),
+			url('/fonts/frenteh1-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
