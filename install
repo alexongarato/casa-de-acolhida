@@ -1,0 +1,22 @@
+#! /bin/bash
+cd "$(dirname "$0")"
+
+#create basic folder structure
+mkdir api
+mkdir app
+mkdir public
+mkdir public/styles
+mkdir public/scripts
+mkdir public/images
+mkdir public/fonts
+
+#set permisson to run
+chmod +x 'install'
+chmod +x 'run'
+chmod +x 'watch'
+
+#install all dependencies
+npm cache clean
+npm install express --save
+
+echo "Done"

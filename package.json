@@ -1,0 +1,16 @@
+{
+  "name": "casa-de-acolhida",
+  "description": "",
+  "version": "1.0.0",
+  "author": "Alex Ongarato <alexongarato@gmail.com>",
+  "license": "ISC",
+  "homepage": "http://www.acolhida.org.br/",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
