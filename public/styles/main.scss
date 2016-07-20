@@ -2,16 +2,17 @@
 @import 'bsc-mixins';
 
 /* VARS */
-$Yellow: #dcb14a;
+$Yellow: #ebb23f;
 $DarkYellow: #c59f43;
-$Pink: #cb656a;
+$Pink: #e55c67;
 $DarkPink: #af595d;
 $Black: #303030;
 $White: #fff;
-$wrapperWidth: 90%;
+$wrapperWidth: 700px;
 $animaTimeFast: 0.2s;
 $animaTimeDef: 0.3s;
 $animaTimeSlow: 0.5s;
+$animaTimeVerySlow: 0.7s;
 
 
 /*FONTS*/
@@ -20,7 +21,76 @@ $animaTimeSlow: 0.5s;
 	font: 30px "WaskNewRegularItalic";
 	b
 	{
-		font: 30px "WaskNewBold";
+		font-family: "WaskNewBold";
+	}
+}
+
+.headline_font
+{
+	font: 40px "WaskNewRegularItalic";
+	font-style: italic;
+	b
+	{
+		font-family: "WaskNewBold";
+		font-style: normal;
+	}
+	mark
+	{
+		font-family: "WaskNewBold";
+		background-color: $Pink;
+		font-style: normal;
+	}
+}
+.wrapper
+{
+	max-width: $wrapperWidth;
+	margin: 0px auto;
+}
+
+mark
+{
+	padding: 0px 5px 0px 5px;
+	margin: 0px -5px 0px -5px;
+}
+
+.icon
+{
+	&:before
+	{
+		content: " ";
+		background: url(../images/menu_icons.png) 3px 0 no-repeat;
+		width: 40px;
+		height: 40px;
+		display: block;
+		margin: 9px auto;
+		transition: background $animaTimeFast;
+		transition-timing-function: ease-in-out;
+	}
+
+	&.place:before
+	{
+		background-position-y: 2px;
+	}
+
+	&.donation:before
+	{
+		background-position-y: -43px;
+	}
+
+	&.partners:before
+	{
+		background-position-y: -89px;
+    	background-position-x: 2px;
+	}
+
+	&.transfer:before
+	{
+		background-position-y: -135px;
+	}
+
+	&.contact:before
+	{
+		background-position-y: -178px;
 	}
 }
 
@@ -35,6 +105,7 @@ body
 {
 	color: $Black;
 	background: $Yellow;
+	/*background: url(../images/layout.png) right -70px no-repeat;*/
 
 	#loader
 	{
@@ -50,8 +121,8 @@ body
 		transition: all $animaTimeFast;
 		p
 		{
-			line-height: 100%;
-			margin: 45% auto;
+		    top: 45%;
+			position: relative;
 		}
 
 		&.hidden
@@ -78,6 +149,15 @@ body
 		h1
 		{
 			transition: all $animaTimeDef;
+			background-size: contain !important;
+			width: 192px;
+			height: 140px;
+			text-indent: -9999em;
+			margin: 0px auto;
+		    margin-bottom: 0px;
+		    top: 63px;
+		    position: relative;
+
 			&.yellow
 			{
 				background: url(../images/casa-de-acolhida-yellow.png) center center no-repeat;
@@ -93,36 +173,96 @@ body
 				width: 317px;
 				height: 229px;	
 			}
-
-			background-size: contain !important;
-			width: 192px;
-			height: 140px;
-			text-indent: -9999em;
-			margin: 63px auto;
-			margin-bottom: 0px;
 		}
+
 		nav
 		{
-			border: 1px solid red;
+			position: absolute;
 		    height: 430px;
-		    width: auto;
-		    position: absolute;
 		    right: 0px;
 		    top: calc(50% - 215px);
+		    overflow: hidden;
+
+		    ul
+		    {
+			    margin-top: 30px;
+			    margin-right: 95px;
+		    	li
+		    	{
+		    		cursor: pointer;
+		    		font: 30px "WaskNewRegular";
+		    		color: $DarkPink;
+		    		text-align: right;
+		    		margin-bottom: 14px;
+		    		transition: all $animaTimeDef;
+		    		&.active, &:hover
+		    		{
+		    			font-size: 40px;
+		    			color: $Black;
+		    			.icon
+			    		{
+			    			width: 60px;
+			    			background: $Pink;
+			    			transform: scale(1);
+			    			&:before
+			    			{
+			    				background-position-x:-38px;
+			    			}
+			    		}
+		    		}
+
+		    		.label, .icon
+		    		{
+		    			display: inline-block;
+		    			vertical-align: top;
+		    			position: relative;
+		    		}
+
+		    		.label
+		    		{
+		    			line-height: 60px;
+		    			letter-spacing: -1px;
+		    		}
+
+		    		.icon
+		    		{
+		    			width: 60px;
+		    			height: 60px;
+		    			margin-left: 10px;
+		    			@include border-radius(7px);
+		    			transform: scale(0.95);
+		    			transition: background $animaTimeSlow, transform $animaTimeDef;
+		    		}
+		    	}
+		    }
+		    
+		    .menu_circle
+		    {
+		    	transition: transform $animaTimeVerySlow;
+		    	transition-timing-function: ease-in-out;
+		    	transform: rotate(0deg);
+		    	color: red;
+		    	right: -657px;
+			    position: absolute;
+			    top: -150px;
+			    opacity: 0.3;
+		    }
 		}
 	}
 
 	section
 	{
-		h1
-		{
-			@extend .subtitle_font;
-		}
-
-
+		display: none;
 		&#place
 		{
+			display: block;
 			margin-top: 124px;
+
+			h1
+			{
+				@extend .headline_font;
+				text-transform: uppercase;
+			}
 		}
 
 		&#donation
@@ -143,6 +283,12 @@ body
 		&#contact
 		{
 			margin-top: 124px;
+
+			h1
+			{
+				@extend .subtitle_font;
+			}
+			
 			form
 			{
 				.textarea
@@ -151,6 +297,12 @@ body
 				}
 			}
 		}
+	}
+
+	footer
+	{
+		position: absolute;
+		bottom: 0px;
 	}
 }
 
