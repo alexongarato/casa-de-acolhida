@@ -13,6 +13,7 @@ $DarkPink: #af595d;
 $Black: #303030;
 $White: #fff;
 $wrapperWidth: 700px;
+$rightMargin: 5vw;
 $animaTimeFast: 0.2s;
 $animaTimeDef: 0.3s;
 $animaTimeSlow: 0.5s;
@@ -53,6 +54,18 @@ $animaTimeVerySlow: 0.7s;
 		font-style: normal;
 	}
 }
+
+.bottomline_font
+{
+	font: 18px "WaskNewRegular";
+	font-style: normal;
+	b
+	{
+		font-family: "WaskNewBold";
+		font-style: normal;
+	}
+}
+
 .wrapper
 {
 	max-width: $wrapperWidth;
@@ -85,6 +98,26 @@ mark
 	}
 }
 
+.yoyoV
+{
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-name: yoyoV;
+	animation-duration: $animaTimeSlow;
+	@keyframes yoyoV 
+	{
+	  from 
+	  {
+	    top: 0px;
+	  }
+
+	  to 
+	  {
+	    top: 5px;
+	  }
+	}
+}
+
 .shadowButton
 {
 	@include border-radius(15px);
@@ -97,7 +130,7 @@ mark
 		@include box-shadow(0px 10px 30px 0px rgba(0, 0, 0, 0.2));
 		transform: scale(0.99);
 		
-		.icon
+		.icon-heart
 		{
 			@extend .heartBeatAnima;
 		}
@@ -110,44 +143,30 @@ mark
 	}
 }
 
-.icon
+.anchor
 {
-	&:before
+	@include border-radius(15px 15px 0 0);
+	@include transition(all $animaTimeDef);
+	transition-timing-function: cubic-bezier(0, 0.74, 0.39, 1.39);
+	width: 122px;
+	height: 80px;
+	position: fixed;
+	bottom: -10px;
+	background: $Pink;
+	margin-left: -61px;
+	&:hover
+	{	
+		bottom: 0px;
+		.icon-arrow
+		{
+			@extend .yoyoV;
+		}
+	}
+	.icon-arrow
 	{
-		content: " ";
-		background: url(../images/menu_icons.png) 3px 0 no-repeat;
-		width: 40px;
-		height: 40px;
+		position: relative;
 		display: block;
-		margin: 9px auto;
-		@include transition(background $animaTimeFast);
-		transition-timing-function: ease-in-out;
-	}
-
-	&.place:before
-	{
-		background-position-y: 2px;
-	}
-
-	&.donation:before
-	{
-		background-position-y: -41px;
-	}
-
-	&.partners:before
-	{
-		background-position-y: -89px;
-    	background-position-x: 2px;
-	}
-
-	&.transfer:before
-	{
-		background-position-y: -135px;
-	}
-
-	&.contact:before
-	{
-		background-position-y: -178px;
+		margin-top: 30px;
 	}
 }
 
@@ -158,6 +177,7 @@ body
 {
 	color: $Black;
 	background: $Yellow;
+	@include transition(background $animaTimeSlow, color $animaTimeDef);
 	/*background: url(../images/layout.png) right -70px no-repeat;*/
 
 	#loader
@@ -238,29 +258,29 @@ body
 
 		    ul
 		    {
+		    	min-width: 250px;
 			    margin-top: 30px;
-			    margin-right: 95px;
+			    margin-right: $rightMargin;
 		    	li
 		    	{
 		    		cursor: pointer;
 		    		font: 30px "WaskNewRegular";
-		    		color: $DarkPink;
+		    		color: $DarkYellow;
 		    		text-align: right;
 		    		margin-bottom: 14px;
-		    		@include transition(all $animaTimeDef);
 		    		&.active, &:hover
 		    		{
-		    			font-size: 40px;
-		    			color: $Black;
+		    			color: $Black !important;
+		    			.label
+		    			{
+		    				font-size: 40px;
+		    			}
+
 		    			.icon
 			    		{
 			    			width: 60px;
 			    			background: $Pink;
 			    			transform: scale(1);
-			    			&:before
-			    			{
-			    				background-position-x:-38px;
-			    			}
 			    		}
 		    		}
 
@@ -269,6 +289,7 @@ body
 		    			display: inline-block;
 		    			vertical-align: top;
 		    			position: relative;
+		    			@include transition(font-size $animaTimeDef);
 		    		}
 
 		    		.label
@@ -282,6 +303,8 @@ body
 		    			width: 60px;
 		    			height: 60px;
 		    			margin-left: 10px;
+		    			text-align: center;
+    					line-height: 60px;
 		    			@include border-radius(7px);
 		    			transform: scale(0.95);
 		    			@include transition(background $animaTimeSlow, transform $animaTimeDef);
@@ -318,7 +341,7 @@ body
 				margin-bottom: 75px;
 			}
 
-			a
+			a.link
 			{
 				@extend .headline_font;
 				@extend .shadowButton;
@@ -335,7 +358,7 @@ body
 					font-style: italic !important;
 				}
 				
-				.icon
+				.icon-heart
 				{
 					display: inline-flex;
     				margin-left: 35px;
@@ -347,6 +370,11 @@ body
 	    				background-position-x:-38px;
 	    			}
 				}
+			}
+
+			a.anchor
+			{
+
 			}
 		}
 
@@ -389,6 +417,53 @@ body
 	{
 		position: absolute;
 		bottom: 0px;
+		right: $rightMargin;
+		p
+		{
+			color: $DarkYellow;
+			@include transition(color $animaTimeDef);
+			@extend .bottomline_font;
+			text-transform: uppercase;
+		}
+	}
+
+	&.pink
+	{
+		background: $Pink;
+
+		header
+		{
+			nav
+			{
+				ul
+				{
+					li
+					{
+						color: $DarkPink;
+						&:hover, &.active
+						{
+							.icon
+							{
+								background: $Yellow;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.anchor
+		{
+			background: $Yellow;
+		}
+
+		footer
+		{
+			p
+			{
+				color: $DarkPink;
+			}
+		}
 	}
 }
 
