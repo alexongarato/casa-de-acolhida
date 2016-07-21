@@ -50,7 +50,6 @@ $animaTimeVerySlow: 0.7s;
 	mark
 	{
 		font-family: "WaskNewBold";
-		background-color: $Pink;
 		font-style: normal;
 	}
 }
@@ -76,6 +75,7 @@ mark
 {
 	padding: 0px 5px 0px 5px;
 	margin: 0px -5px 0px -5px;
+	background-color: $Pink;
 }
 
 .heartBeatAnima
@@ -167,6 +167,29 @@ mark
 		position: relative;
 		display: block;
 		margin-top: 30px;
+	}
+}
+
+a.link
+{
+	@extend .headline_font;
+	@extend .shadowButton;
+	text-transform: uppercase;
+	background: $Pink;
+	display: block;
+	margin: 0px auto;
+	
+	b
+	{
+		font-style: italic !important;
+	}
+	
+	.icon
+	{
+		display: inline-flex;
+		margin-left: 35px;
+		top: 2px;
+		position: relative;
 	}
 }
 
@@ -268,6 +291,7 @@ body
 		    		color: $DarkYellow;
 		    		text-align: right;
 		    		margin-bottom: 14px;
+		    		@include transition(color $animaTimeDef);
 		    		&.active, &:hover
 		    		{
 		    			color: $Black !important;
@@ -343,38 +367,9 @@ body
 
 			a.link
 			{
-				@extend .headline_font;
-				@extend .shadowButton;
-				text-transform: uppercase;
-				background: $Pink;
-				display: block;
 				width: 310px;
 				height: 80px;
-				margin: 0px auto;
 				line-height: 80px;
-				
-				b
-				{
-					font-style: italic !important;
-				}
-				
-				.icon-heart
-				{
-					display: inline-flex;
-    				margin-left: 35px;
-    				top: 2px;
-    				position: relative;
-    				
-    				&:before
-	    			{
-	    				background-position-x:-38px;
-	    			}
-				}
-			}
-
-			a.anchor
-			{
-
 			}
 		}
 
@@ -452,7 +447,8 @@ body
 			}
 		}
 		
-		.anchor
+
+		.anchor, .link, mark
 		{
 			background: $Yellow;
 		}
