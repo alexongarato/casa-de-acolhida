@@ -1,6 +1,10 @@
 @import 'fonts';
 @import 'bsc-mixins';
 
+/* RESET */
+@include reset();
+p,.wrapper{ text-align: center; }
+
 /* VARS */
 $Yellow: #ebb23f;
 $DarkYellow: #c59f43;
@@ -14,6 +18,14 @@ $animaTimeDef: 0.3s;
 $animaTimeSlow: 0.5s;
 $animaTimeVerySlow: 0.7s;
 
+@mixin box-shadow($value)
+{
+	-webkit-box-shadow: $value;
+	-moz-box-shadow: $value;
+	-ms-box-shadow: $value;
+	-o-box-shadow: $value;
+	box-shadow: $value;
+}
 
 /*FONTS*/
 .subtitle_font
@@ -53,6 +65,51 @@ mark
 	margin: 0px -5px 0px -5px;
 }
 
+.heartBeatAnima
+{
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-name: heartBeat;
+	animation-duration: $animaTimeSlow;
+	@keyframes heartBeat 
+	{
+	  from 
+	  {
+	    transform: scale(1);
+	  }
+
+	  to 
+	  {
+	    transform: scale(1.2);
+	  }
+	}
+}
+
+.shadowButton
+{
+	@include border-radius(15px);
+	@include box-shadow(0px 20px 50px 0px rgba(0, 0, 0, 0.25));
+	@include transition(all $animaTimeDef);
+	transform: scale(1);
+	
+	&:hover
+	{
+		@include box-shadow(0px 10px 30px 0px rgba(0, 0, 0, 0.2));
+		transform: scale(0.99);
+		
+		.icon
+		{
+			@extend .heartBeatAnima;
+		}
+	}
+
+	&:active
+	{
+		@include box-shadow(0px 0px 0px 0px rgba(0, 0, 0, 0));
+		transform: scale(0.98);
+	}
+}
+
 .icon
 {
 	&:before
@@ -63,7 +120,7 @@ mark
 		height: 40px;
 		display: block;
 		margin: 9px auto;
-		transition: background $animaTimeFast;
+		@include transition(background $animaTimeFast);
 		transition-timing-function: ease-in-out;
 	}
 
@@ -74,7 +131,7 @@ mark
 
 	&.donation:before
 	{
-		background-position-y: -43px;
+		background-position-y: -41px;
 	}
 
 	&.partners:before
@@ -96,10 +153,6 @@ mark
 
 /*-----------------------------*/
 
-/* RESET */
-@include reset();
-p,.wrapper{ text-align: center; }
-
 /* COMMON */
 body
 {
@@ -118,7 +171,7 @@ body
 		height: 100%;
 		background: $Yellow;
 		text-align: center;
-		transition: all $animaTimeFast;
+		@include transition(all $animaTimeFast);
 		p
 		{
 		    top: 45%;
@@ -148,7 +201,7 @@ body
 	{
 		h1
 		{
-			transition: all $animaTimeDef;
+			@include transition(all $animaTimeDef);
 			background-size: contain !important;
 			width: 192px;
 			height: 140px;
@@ -194,7 +247,7 @@ body
 		    		color: $DarkPink;
 		    		text-align: right;
 		    		margin-bottom: 14px;
-		    		transition: all $animaTimeDef;
+		    		@include transition(all $animaTimeDef);
 		    		&.active, &:hover
 		    		{
 		    			font-size: 40px;
@@ -231,14 +284,14 @@ body
 		    			margin-left: 10px;
 		    			@include border-radius(7px);
 		    			transform: scale(0.95);
-		    			transition: background $animaTimeSlow, transform $animaTimeDef;
+		    			@include transition(background $animaTimeSlow, transform $animaTimeDef);
 		    		}
 		    	}
 		    }
 		    
 		    .menu_circle
 		    {
-		    	transition: transform $animaTimeVerySlow;
+		    	@include transition(transform $animaTimeVerySlow);
 		    	transition-timing-function: ease-in-out;
 		    	transform: rotate(0deg);
 		    	color: red;
@@ -262,12 +315,45 @@ body
 			{
 				@extend .headline_font;
 				text-transform: uppercase;
+				margin-bottom: 75px;
+			}
+
+			a
+			{
+				@extend .headline_font;
+				@extend .shadowButton;
+				text-transform: uppercase;
+				background: $Pink;
+				display: block;
+				width: 310px;
+				height: 80px;
+				margin: 0px auto;
+				line-height: 80px;
+				
+				b
+				{
+					font-style: italic !important;
+				}
+				
+				.icon
+				{
+					display: inline-flex;
+    				margin-left: 35px;
+    				top: 2px;
+    				position: relative;
+    				
+    				&:before
+	    			{
+	    				background-position-x:-38px;
+	    			}
+				}
 			}
 		}
 
 		&#donation
 		{
 			margin-top: 124px;
+			
 		}
 
 		&#partners
