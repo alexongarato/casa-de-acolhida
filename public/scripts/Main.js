@@ -2,7 +2,7 @@ var _animaTimeFast = 0.09;
 var _animaTimeDef = 0.3;
 var _animaTimeSlow = 0.5;
 var _sections;
-var _currentPage;
+var _currentPage = undefined;
 var Main = {
 	init:function()
 	{
@@ -16,6 +16,7 @@ var Main = {
 			console.info("App is ready.");
 
 			_sections = $("section");
+
 			Main.EnableMainMenu();
 			Main.ShowPage(0);
 		});
@@ -38,17 +39,15 @@ var Main = {
 		var newPage = $(_sections[index]);
 		var oldPage = _currentPage;
 
+		$("body").attr('class', newPage.data("bg-class"));
+
 		if(oldPage != undefined)
 		{
 			Main.DissmissPage(_currentPage, index);
+			_currentPage = undefined;
 			return;
 		}
 
-		_currentPage = newPage;
-		newPage.show();
-
-		$("body").attr('class', newPage.data("bg-class"))
-		
 		var delay = 0;
 		var ease = Back.easeOut;
 		var marginTop = 20;
@@ -76,13 +75,20 @@ var Main = {
 		delay += _animaTimeDef*4;
 		TweenMax.to(newPage.find(".anchor"), 0, {opacity:1, bottom:-10, delay:delay, clearProps:"all"});
 
+		newPage.show();
+
+		_currentPage = newPage;
 	},
 	DissmissPage:function(targetObject, nextIndex)
 	{
 		console.log("Hidding old page...");
-		targetObject.hide();
-		_currentPage = undefined;
-		Main.ShowPage(nextIndex);
+		TweenMax.to(targetObject, _animaTimeFast, {marginTop:parseInt(targetObject.css("margin-top")) - 10, opacity:0, clearProps:"all", onComplete:function()
+		{
+			targetObject.hide();
+			
+			console.log("Calling new page...");
+			Main.ShowPage(nextIndex);
+		}});
 	}
 }
 

@@ -366,7 +366,7 @@ body
 			height: 80px;
 			line-height: 80px;
 		}
-			
+
 		&#place
 		{
 			display: block;
@@ -468,11 +468,35 @@ body
 /* MOBILE */
 @media only screen and (max-width: 768px)
 {
-
+	
 }
 
 /* DESKTOP */
 @media only screen and (min-width: 768px)
 {
 	
+}
+
+/* SMALL SCREEN HEIGHT */
+@media only screen and (max-height: 800px)
+{
+	body
+	{
+		header
+		{
+			h1
+			{
+				.big
+				{
+					height: 150px !important;
+					margin-bottom: -20px !important;
+				}
+			}
+		}
+
+		section
+		{
+			
+		}
+	}
 }
