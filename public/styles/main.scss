@@ -353,24 +353,26 @@ body
 	section
 	{
 		display: none;
+		h1
+		{
+			@extend .headline_font;
+			text-transform: uppercase;
+			margin-bottom: 75px;
+		}
+
+		a.link
+		{
+			width: 310px;
+			height: 80px;
+			line-height: 80px;
+		}
+			
 		&#place
 		{
 			display: block;
 			margin-top: 124px;
 
-			h1
-			{
-				@extend .headline_font;
-				text-transform: uppercase;
-				margin-bottom: 75px;
-			}
-
-			a.link
-			{
-				width: 310px;
-				height: 80px;
-				line-height: 80px;
-			}
+			
 		}
 
 		&#donation
