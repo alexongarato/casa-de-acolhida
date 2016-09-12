@@ -3,6 +3,8 @@ var _animaTimeDef = 0.3;
 var _animaTimeSlow = 0.5;
 var _sections;
 var _currentPage = undefined;
+var _lockScroll = false;
+var _scrollTimeout = undefined;
 var Main = {
 	init:function()
 	{
@@ -16,38 +18,94 @@ var Main = {
 			console.info("App is ready.");
 
 			_sections = $("section");
+			_sections.css("opacity", 0);
+			_sections.css("min-height", $(window).height());
 
 			Main.EnableMainMenu();
-			Main.ShowPage(0);
+			// Main.ShowPage(0);
+			Main.onScrollHandler();
 		});
+
+		window.addEventListener("scroll", Main.onScrollHandler);
+	},
+	onScrollHandler:function()
+	{
+		if(_scrollTimeout)
+		{
+			clearTimeout(_scrollTimeout);
+			_scrollTimeout = undefined;
+		}
+
+		_scrollTimeout = setTimeout(function()
+		{
+			console.log("test current page");
+			
+			var h = $(window).height() * 0.4;
+			var top = $(window).scrollTop() + h;
+			
+			var currSetionTop = 0;
+			var currSetionHeight = 0;
+			$("section").each(function(i,e)
+			{
+				currSetionTop = $(e).position().top;
+				currSetionHeight = $(e).height();
+				if(top >= currSetionTop && top <= (currSetionTop + currSetionHeight))
+				{
+					console.log('opened', i);
+					Main.ShowPage(i);
+					return;
+				}
+				else
+				{
+					// console.log("closed", i);
+				}
+			});
+		}, 30);
 	},
 	EnableMainMenu:function()
 	{
 		$("header>nav>ul>li").each(function(i,e)
 		{
+			$(e).click(function(evt)
+			{
+				var index = $(evt.currentTarget).index();
+				var newYPos = index == 0 ? 0 : $(_sections[index]).position().top;
+				TweenLite.to($(window), _animaTimeDef, {scrollTo:{y:newYPos}, ease:Power2.easeInOut });
+				// Main.ShowPage($(this).index());
+			});
+		});
+
+		$("section .anchor").each(function(i,e)
+		{
+			var index = i + 1;
 			$(e).click(function(e)
 			{
-				// console.log($(this).index());
-				Main.ShowPage($(this).index());
-				$("header>nav>ul>li.active").removeClass("active");
-				$(this).addClass("active");
+				e.preventDefault();
+				//Main.ShowPage($(this).parents("section").index());
+				$("header>nav>ul>li")[index].click();
 			});
 		});
 	},
 	ShowPage:function(index)
 	{
+		$("header>nav>ul>li.active").removeClass("active");
+		$($("header>nav>ul>li")[index]).addClass("active");
+
 		var newPage = $(_sections[index]);
 		var oldPage = _currentPage;
 
 		$("body").attr('class', newPage.data("bg-class"));
 
+		/*
 		if(oldPage != undefined)
 		{
 			Main.DissmissPage(_currentPage, index);
 			_currentPage = undefined;
 			return;
-		}
+		}*/
 
+		if(newPage.css("opacity") != 0) return;
+		newPage.css("opacity", 1);
 		var delay = 0;
 		var ease = Back.easeOut;
 		var marginTop = 20;
@@ -82,7 +140,7 @@ var Main = {
 	DissmissPage:function(targetObject, nextIndex)
 	{
 		console.log("Hidding old page...");
-		TweenMax.to(targetObject, _animaTimeFast, {marginTop:parseInt(targetObject.css("margin-top")) - 10, opacity:0, clearProps:"all", onComplete:function()
+		TweenMax.to(targetObject, _animaTimeFast, {marginTop:parseInt(targetObject.css("margin-top")) - 30, opacity:0, clearProps:"all", onComplete:function()
 		{
 			targetObject.hide();
 			

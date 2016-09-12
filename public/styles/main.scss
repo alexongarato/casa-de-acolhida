@@ -18,6 +18,7 @@ $animaTimeFast: 0.2s;
 $animaTimeDef: 0.3s;
 $animaTimeSlow: 0.5s;
 $animaTimeVerySlow: 0.7s;
+$blackalpha:rgba(30, 30, 30, 0.10);
 
 @mixin box-shadow($value)
 {
@@ -193,6 +194,12 @@ a.link
 	}
 }
 
+.field-container
+{
+	@include border-radius(10px);
+	background: red;
+}
+
 /*-----------------------------*/
 
 /* COMMON */
@@ -242,6 +249,7 @@ body
 
 	header
 	{
+		z-index: 1000;
 		h1
 		{
 			@include transition(all $animaTimeDef);
@@ -273,7 +281,7 @@ body
 
 		nav
 		{
-			position: absolute;
+			position: fixed;
 		    height: 430px;
 		    right: 0px;
 		    top: calc(50% - 215px);
@@ -352,7 +360,10 @@ body
 
 	section
 	{
-		display: none;
+		/*display: none;*/
+		/*border: 1px solid white;*/
+		margin-bottom: 50px;
+		@extend .bottomline_font;
 		h1
 		{
 			@extend .headline_font;
@@ -371,24 +382,135 @@ body
 		{
 			display: block;
 			margin-top: 124px;
-
-			
 		}
 
 		&#donation
 		{
 			margin-top: 124px;
-			
+			.group
+			{
+				height: 95px;
+				display: block;
+				.tag
+				{
+					color: $Yellow;
+					display: inline-block;
+				    text-transform: uppercase;
+				    text-align: center;
+				    line-height: 32px;
+				    transform: rotate(-17deg);
+				    font-size: 40px;
+				    margin-right:20px; 
+				}
+				.currency
+				{
+					display: inline-block;
+					top: -10px;
+					position: relative;
+					margin-right:10px; 
+					b
+					{
+						font-size: 53px;
+					}
+				}
+				.field-container
+				{
+					display: inline-block;
+					width: 310px;
+					height: 82px;
+					position: relative;
+					top: -45px;
+					background: $blackalpha;
+					margin-right:10px; 
+				}
+				.link
+				{
+					width: 93px;
+					height: 82px;
+					display: inline-block;
+					position: relative;
+					top: -8px;
+					.icon
+					{
+						margin-left: 0px !important;
+						top: 5px !important;
+					}
+				}
+			}
 		}
 
 		&#partners
 		{
 			margin-top: 124px;
+			.wrapper
+			{
+				ul
+				{
+					li
+					{
+						width: 250px;
+						height: 170px;
+						background: $blackalpha;
+						display: inline-block;
+						margin: 20px 20px 80px 20px;
+						@include border-radius(10px);
+						>span
+						{
+							top: -30px;
+    						position: relative;
+						}
+						.link
+						{
+						    width: 50px;
+						    height: 50px;
+						    position: relative;
+						    right: -80px;
+						    margin-top: 120px;
+							.icon
+							{
+								margin-left: 0px !important;
+								top: 11px !important;
+							}
+						}
+					}
+				}
+			}
 		}
 
-		&#tranfer
+		&#transfer
 		{
 			margin-top: 124px;
+			.wrapper
+			{
+				h1
+				{
+					@extend .subtitle_font;
+					color: white !important;
+				}
+
+				.container
+				{
+					background: $blackalpha;
+					@include border-radius(10px);
+					padding: 10px;
+
+					ul
+					{
+						li
+						{
+							.label
+							{
+
+							}
+
+							.value
+							{
+
+							}
+						}
+					} 
+				}
+			}
 		}
 
 		&#contact
@@ -412,9 +534,9 @@ body
 
 	footer
 	{
-		position: absolute;
-		bottom: 0px;
-		right: $rightMargin;
+		position: fixed;
+	    bottom: 1vw;
+	    right: 1vw;
 		p
 		{
 			color: $DarkYellow;
@@ -486,7 +608,7 @@ body
 		{
 			h1
 			{
-				.big
+				&.big
 				{
 					height: 150px !important;
 					margin-bottom: -20px !important;
@@ -496,7 +618,16 @@ body
 
 		section
 		{
-			
+			&#place
+			{
+				.wrapper
+				{
+					h1
+					{
+						margin-bottom: 30px !important;
+					}
+				}
+			}
 		}
 	}
 }
