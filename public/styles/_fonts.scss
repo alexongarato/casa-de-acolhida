@@ -1,50 +1,50 @@
 @font-face {
 	font-family: 'WaskNewRegular';
-	src: 	url("/fonts/wask_new-webfont.eot?#iefix") format("embedded-opentype"), 
-			url("/fonts/wask_new-webfont.woff") format("woff");
+	src: 	url("../fonts/wask_new-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("../fonts/wask_new-webfont.woff") format("woff");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'WaskNewBold';
-	src: 	url("/fonts/wask_new_bold-webfont.eot?#iefix") format("embedded-opentype"), 
-			url("/fonts/wask_new_bold-webfont.woff") format("woff");
+	src: 	url("../fonts/wask_new_bold-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("../fonts/wask_new_bold-webfont.woff") format("woff");
 	font-weight: bold;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'WaskNewRegularBoldItalic';
-	src: 	url("/fonts/wask_new_bold_italic-webfont.eot?#iefix") format("embedded-opentype"), 
-			url("/fonts/wask_new_bold_italic-webfont.woff") format("woff");
+	src: 	url("../fonts/wask_new_bold_italic-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("../fonts/wask_new_bold_italic-webfont.woff") format("woff");
 	font-weight: bold;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: 'WaskNewRegularItalic';
-	src: 	url("/fonts/wask_new_italic-webfont.eot?#iefix") format("embedded-opentype"), 
-			url("/fonts/wask_new_italic-webfont.woff") format("woff");
+	src: 	url("../fonts/wask_new_italic-webfont.eot?#iefix") format("embedded-opentype"), 
+			url("../fonts/wask_new_italic-webfont.woff") format("woff");
 	font-weight: normal;
 	font-style: italic;
 }
 
 @font-face {
 	font-family: 'Frenteh1Regular';
-	src: 	url('/fonts/frenteh1-regular-webfont.woff2') format('woff2'),
-			url('/fonts/frenteh1-regular-webfont.woff') format('woff');
+	src: 	url('../fonts/frenteh1-regular-webfont.woff2') format('woff2'),
+			url('../fonts/frenteh1-regular-webfont.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
     font-family: 'icomoon';
-    src:    url('/fonts/icomoon.eot?y264a2');
-    src:    url('/fonts/icomoon.eot?y264a2#iefix') format('embedded-opentype'),
-        url('/fonts/icomoon.ttf?y264a2') format('truetype'),
-        url('/fonts/icomoon.woff?y264a2') format('woff'),
-        url('/fonts/icomoon.svg?y264a2#icomoon') format('svg');
+    src:    url('../fonts/icomoon.eot?y264a2');
+    src:    url('../fonts/icomoon.eot?y264a2#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?y264a2') format('truetype'),
+        url('../fonts/icomoon.woff?y264a2') format('woff'),
+        url('../fonts/icomoon.svg?y264a2#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -64,31 +64,36 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-clips:before {
-    content: "\e902";
-}
-.icon-heart:before {
-    content: "\e903";
-}
-.icon-image:before {
-    content: "\e904";
-}
-.icon-speach:before {
-    content: "\e905";
+.icon-sponsor:before {
+  content: "\e900";
 }
 .icon-arrow:before {
-    content: "\e901";
+  content: "\e901";
 }
-.icon-sponsor:before {
-    content: "\e900";
+.icon-clips:before {
+  content: "\e902";
+}
+.icon-heart:before {
+  content: "\e903";
+}
+.icon-image:before {
+  content: "\e904";
+}
+.icon-speach:before {
+  content: "\e905";
 }
 .icon-facebook:before {
-    content: "\ea90";
+  content: "\ea90";
 }
 .icon-instagram:before {
-    content: "\ea92";
+  content: "\ea92";
 }
 .icon-twitter:before {
-    content: "\ea96";
+  content: "\ea96";
 }
-
+.icon-home:before {
+  content: "\e906";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}

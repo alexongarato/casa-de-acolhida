@@ -13,7 +13,7 @@ $DarkPink: #af595d;
 $Black: #303030;
 $White: #fff;
 $wrapperWidth: 700px;
-$rightMargin: 5vw;
+$rightMargin: 3vw;
 $animaTimeFast: 0.2s;
 $animaTimeDef: 0.3s;
 $animaTimeSlow: 0.5s;
@@ -68,8 +68,17 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 
 .wrapper
 {
+	display: table-cell;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.inner
+{
 	max-width: $wrapperWidth;
-	margin: 0px auto;
+	margin-left: auto;
+    margin-right: auto; 
 }
 
 mark
@@ -126,7 +135,7 @@ mark
 	@include transition(background $animaTimeDef, transform $animaTimeDef, box-shadow $animaTimeDef);
 	transform: scale(1);
 	
-	&:hover
+	&:hover, &.hover
 	{
 		@include box-shadow(0px 10px 30px 0px rgba(0, 0, 0, 0.2));
 		transform: scale(0.99);
@@ -155,6 +164,7 @@ mark
 	bottom: -10px;
 	background: $Pink;
 	margin-left: -61px;
+	z-index: 10000;
 	&:hover
 	{	
 		bottom: 0px;
@@ -249,7 +259,12 @@ body
 
 	header
 	{
-		z-index: 1000;
+		position: fixed;
+	    width: 100%;
+	    height: 100%;
+	    top: 0px;
+	    left: 0px;
+	    z-index: 0;
 		h1
 		{
 			@include transition(all $animaTimeDef);
@@ -261,6 +276,7 @@ body
 		    margin-bottom: 0px;
 		    top: 63px;
 		    position: relative;
+		    pointer-events: none;
 
 			&.yellow
 			{
@@ -278,92 +294,96 @@ body
 				height: 229px;	
 			}
 		}
+	}
 
-		nav
-		{
-			position: fixed;
-		    height: 430px;
-		    right: 0px;
-		    top: calc(50% - 215px);
-		    overflow: hidden;
+	>nav
+	{
+		position: fixed;
+	    height: 430px;
+	    right: 0px;
+	    top: calc(50% - 215px);
+	    overflow: hidden;
+	    z-index: 9999;
+	    ul
+	    {
+	    	min-width: 250px;
+		    margin-top: 30px;
+		    margin-right: $rightMargin;
+	    	li
+	    	{
+	    		cursor: pointer;
+	    		font: 30px "WaskNewRegular";
+	    		color: $DarkYellow;
+	    		text-align: right;
+	    		margin-bottom: 14px;
+	    		@include transition(color $animaTimeDef);
+	    		&.active, &:hover
+	    		{
+	    			color: $Black !important;
+	    			.label
+	    			{
+	    				font-size: 40px;
+	    			}
 
-		    ul
-		    {
-		    	min-width: 250px;
-			    margin-top: 30px;
-			    margin-right: $rightMargin;
-		    	li
-		    	{
-		    		cursor: pointer;
-		    		font: 30px "WaskNewRegular";
-		    		color: $DarkYellow;
-		    		text-align: right;
-		    		margin-bottom: 14px;
-		    		@include transition(color $animaTimeDef);
-		    		&.active, &:hover
-		    		{
-		    			color: $Black !important;
-		    			.label
-		    			{
-		    				font-size: 40px;
-		    			}
-
-		    			.icon
-			    		{
-			    			width: 60px;
-			    			background: $Pink;
-			    			transform: scale(1);
-			    		}
-		    		}
-
-		    		.label, .icon
-		    		{
-		    			display: inline-block;
-		    			vertical-align: top;
-		    			position: relative;
-		    			@include transition(font-size $animaTimeDef);
-		    		}
-
-		    		.label
-		    		{
-		    			line-height: 60px;
-		    			letter-spacing: -1px;
-		    		}
-
-		    		.icon
+	    			.icon
 		    		{
 		    			width: 60px;
-		    			height: 60px;
-		    			margin-left: 10px;
-		    			text-align: center;
-    					line-height: 60px;
-		    			@include border-radius(7px);
-		    			transform: scale(0.95);
-		    			@include transition(background $animaTimeSlow, transform $animaTimeDef);
+		    			background: $Pink;
+		    			transform: scale(1);
 		    		}
-		    	}
-		    }
-		    
-		    .menu_circle
-		    {
-		    	@include transition(transform $animaTimeVerySlow);
-		    	transition-timing-function: ease-in-out;
-		    	transform: rotate(0deg);
-		    	color: red;
-		    	right: -657px;
-			    position: absolute;
-			    top: -150px;
-			    opacity: 0.3;
-		    }
-		}
+	    		}
+
+	    		.label, .icon
+	    		{
+	    			display: inline-block;
+	    			vertical-align: top;
+	    			position: relative;
+	    			@include transition(font-size $animaTimeDef);
+	    		}
+
+	    		.label
+	    		{
+	    			line-height: 60px;
+	    			letter-spacing: -1px;
+	    		}
+
+	    		.icon
+	    		{
+	    			width: 60px;
+	    			height: 60px;
+	    			margin-left: 10px;
+	    			text-align: center;
+					line-height: 60px;
+	    			@include border-radius(7px);
+	    			transform: scale(0.95);
+	    			@include transition(background $animaTimeSlow, transform $animaTimeDef);
+	    		}
+	    	}
+	    }
+	    
+	    .menu_circle
+	    {
+	    	@include transition(transform $animaTimeVerySlow);
+	    	transition-timing-function: ease-in-out;
+	    	transform: rotate(0deg);
+	    	color: red;
+	    	right: -657px;
+		    position: absolute;
+		    top: -150px;
+		    opacity: 0.3;
+	    }
 	}
 
 	section
 	{
-		/*display: none;*/
 		/*border: 1px solid white;*/
-		margin-bottom: 50px;
+		display: table;
+		width: 100%;
+		height: 100%;
+		position: relative;
+		z-index: 1;
 		@extend .bottomline_font;
+
 		h1
 		{
 			@extend .headline_font;
@@ -380,60 +400,65 @@ body
 
 		&#place
 		{
-			display: block;
-			margin-top: 124px;
+			.inner
+			{
+				margin-top: 10%;
+			}
 		}
 
 		&#donation
 		{
-			margin-top: 124px;
-			.group
+			.inner
 			{
-				height: 95px;
-				display: block;
-				.tag
+				margin-top: 10%;
+				.group
 				{
-					color: $Yellow;
-					display: inline-block;
-				    text-transform: uppercase;
-				    text-align: center;
-				    line-height: 32px;
-				    transform: rotate(-17deg);
-				    font-size: 40px;
-				    margin-right:20px; 
-				}
-				.currency
-				{
-					display: inline-block;
-					top: -10px;
-					position: relative;
-					margin-right:10px; 
-					b
+					height: 95px;
+					display: block;
+					.tag
 					{
-						font-size: 53px;
+						color: $Yellow;
+						display: inline-block;
+					    text-transform: uppercase;
+					    text-align: center;
+					    line-height: 32px;
+					    transform: rotate(-17deg);
+					    font-size: 40px;
+					    margin-right:20px; 
 					}
-				}
-				.field-container
-				{
-					display: inline-block;
-					width: 310px;
-					height: 82px;
-					position: relative;
-					top: -45px;
-					background: $blackalpha;
-					margin-right:10px; 
-				}
-				.link
-				{
-					width: 93px;
-					height: 82px;
-					display: inline-block;
-					position: relative;
-					top: -8px;
-					.icon
+					.currency
 					{
-						margin-left: 0px !important;
-						top: 5px !important;
+						display: inline-block;
+						top: -10px;
+						position: relative;
+						margin-right:10px; 
+						b
+						{
+							font-size: 53px;
+						}
+					}
+					.field-container
+					{
+						display: inline-block;
+						width: 310px;
+						height: 82px;
+						position: relative;
+						top: -45px;
+						background: $blackalpha;
+						margin-right:10px; 
+					}
+					.link
+					{
+						width: 93px;
+						height: 82px;
+						display: inline-block;
+						position: relative;
+						top: -8px;
+						.icon
+						{
+							margin-left: 0px !important;
+							top: 5px !important;
+						}
 					}
 				}
 			}
@@ -441,35 +466,80 @@ body
 
 		&#partners
 		{
-			margin-top: 124px;
 			.wrapper
 			{
-				ul
+				vertical-align: top;
+				.inner
 				{
-					li
+					margin-top: 230px;
+					max-width: 1180px;
+					padding: 0px 10% 0px 10%;
+					h1
 					{
-						width: 250px;
-						height: 170px;
-						background: $blackalpha;
-						display: inline-block;
-						margin: 20px 20px 80px 20px;
-						@include border-radius(10px);
-						>span
+						font-size: 30px !important;
+						text-transform: none !important;
+						margin-bottom: 30px !important;
+					}
+					ul
+					{
+						li
 						{
-							top: -30px;
-    						position: relative;
-						}
-						.link
-						{
-						    width: 50px;
-						    height: 50px;
-						    position: relative;
-						    right: -80px;
-						    margin-top: 120px;
-							.icon
+							display: inline-block;
+							margin: 15px 15px 0px 15px;
+							cursor: pointer;
+							>span
 							{
-								margin-left: 0px !important;
-								top: 11px !important;
+								top: -5px;
+	    						position: relative;
+							}
+							.container
+							{
+								width: 200px;
+								height: 150px;
+								background: $blackalpha;
+								@include border-radius(10px);
+								overflow: hidden;
+								padding: 0px;
+								background-size: cover;
+								background-position: center center;
+								
+								-webkit-filter: grayscale(100%);
+							    filter: grayscale(100%);
+							    -webkit-transition: .3s ease-in-out;
+							    transition: .3s ease-in-out;
+							}
+							img
+							{
+								display: none;
+								height: 0px;
+								width: 0px;
+							}
+							.link
+							{
+							    width: 50px;
+							    height: 50px;
+							    position: relative;
+							    right: -80px;
+							    margin-top: -23px;
+								.icon
+								{
+									margin-left: 0px !important;
+								    top: -14px !important;
+								    font-size: 30px;
+								}
+							}
+
+							&:hover
+							{
+								.container
+								{
+									-webkit-filter: grayscale(0%);
+								}
+
+								.link
+								{
+									@extend .link:hover;
+								}
 							}
 						}
 					}
@@ -479,7 +549,6 @@ body
 
 		&#transfer
 		{
-			margin-top: 124px;
 			.wrapper
 			{
 				h1
@@ -515,8 +584,6 @@ body
 
 		&#contact
 		{
-			margin-top: 124px;
-
 			h1
 			{
 				@extend .subtitle_font;
@@ -536,7 +603,7 @@ body
 	{
 		position: fixed;
 	    bottom: 1vw;
-	    right: 1vw;
+	    right: $rightMargin;
 		p
 		{
 			color: $DarkYellow;
@@ -550,21 +617,18 @@ body
 	{
 		background: $Pink;
 
-		header
+		nav
 		{
-			nav
+			ul
 			{
-				ul
+				li
 				{
-					li
+					color: $DarkPink;
+					&:hover, &.active
 					{
-						color: $DarkPink;
-						&:hover, &.active
+						.icon
 						{
-							.icon
-							{
-								background: $Yellow;
-							}
+							background: $Yellow;
 						}
 					}
 				}
@@ -588,9 +652,26 @@ body
 }
 
 /* MOBILE */
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: 1364px)
 {
-	
+	body
+	{
+		>nav
+		{
+			ul
+			{
+				margin-right: 1vw !important;
+
+				li
+				{
+					.label
+					{
+						display: none;
+					}
+				}
+			}
+		}
+	}
 }
 
 /* DESKTOP */
@@ -625,6 +706,28 @@ body
 					h1
 					{
 						margin-bottom: 30px !important;
+					}
+				}
+			}
+
+			&#partners
+			{
+				.wrapper
+				{
+					.inner
+					{
+						max-width: 910px;
+						ul
+						{
+							li
+							{
+								.container
+								{
+									width: 140px !important;
+									height: 100px !important;
+								}
+							}
+						}
 					}
 				}
 			}

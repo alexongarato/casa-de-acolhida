@@ -19,13 +19,19 @@ var Main = {
 
 			_sections = $("section");
 			_sections.css("opacity", 0);
-			_sections.css("min-height", $(window).height());
 
+			$("section#partners .container").each(function(i,e)
+			{
+				$(e).attr("style", "background-image:url("+$($(e).find("img")).attr("src")+")");
+			});
+
+			Main.onResizeHandler();
 			Main.EnableMainMenu();
 			// Main.ShowPage(0);
 			Main.onScrollHandler();
 		});
 
+		window.addEventListener("resize", Main.onResizeHandler);
 		window.addEventListener("scroll", Main.onScrollHandler);
 	},
 	onScrollHandler:function()
@@ -55,22 +61,23 @@ var Main = {
 					Main.ShowPage(i);
 					return;
 				}
-				else
-				{
-					// console.log("closed", i);
-				}
 			});
 		}, 30);
 	},
+	onResizeHandler:function()
+	{
+		console.log("on resize");
+		_sections.css("min-height", $(window).height());
+	},
 	EnableMainMenu:function()
 	{
-		$("header>nav>ul>li").each(function(i,e)
+		$("body>nav>ul>li").each(function(i,e)
 		{
 			$(e).click(function(evt)
 			{
 				var index = $(evt.currentTarget).index();
 				var newYPos = index == 0 ? 0 : $(_sections[index]).position().top;
-				TweenLite.to($(window), _animaTimeDef, {scrollTo:{y:newYPos}, ease:Power2.easeInOut });
+				TweenLite.to($(window), _animaTimeSlow, {scrollTo:{y:newYPos}, ease:Power2.easeInOut });
 				// Main.ShowPage($(this).index());
 			});
 		});
@@ -82,27 +89,34 @@ var Main = {
 			{
 				e.preventDefault();
 				//Main.ShowPage($(this).parents("section").index());
-				$("header>nav>ul>li")[index].click();
+				$("body>nav>ul>li")[index].click();
 			});
 		});
 	},
 	ShowPage:function(index)
 	{
-		$("header>nav>ul>li.active").removeClass("active");
-		$($("header>nav>ul>li")[index]).addClass("active");
+		$("body>nav>ul>li.active").removeClass("active");
+		$($("body>nav>ul>li")[index]).addClass("active");
+		$("header>h1").removeClass("big").addClass($($("body>nav>ul>li")[index]).data("logo"));
 
 		var newPage = $(_sections[index]);
 		var oldPage = _currentPage;
 
 		$("body").attr('class', newPage.data("bg-class"));
 
-		/*
 		if(oldPage != undefined)
 		{
-			Main.DissmissPage(_currentPage, index);
-			_currentPage = undefined;
-			return;
-		}*/
+			TweenMax.killTweensOf($(oldPage.find(".anchor")));
+			TweenMax.to($(oldPage.find(".anchor")), _animaTimeFast, {bottom:-80, clearProps:"all", ease:ease, onComplete:function()
+			{
+				$(oldPage.find(".anchor")).hide();
+			}});
+			// Main.DissmissPage(_currentPage, index);
+			// _currentPage = undefined;
+			// return;
+		}
+
+		$(newPage.find(".anchor")).show();
 
 		if(newPage.css("opacity") != 0) return;
 		newPage.css("opacity", 1);
@@ -133,10 +147,8 @@ var Main = {
 		delay += _animaTimeDef*4;
 		TweenMax.to(newPage.find(".anchor"), 0, {opacity:1, bottom:-10, delay:delay, clearProps:"all"});
 
-		newPage.show();
-
 		_currentPage = newPage;
-	},
+	}/*,
 	DissmissPage:function(targetObject, nextIndex)
 	{
 		console.log("Hidding old page...");
@@ -147,7 +159,7 @@ var Main = {
 			console.log("Calling new page...");
 			Main.ShowPage(nextIndex);
 		}});
-	}
+	}*/
 }
 
 Main.init();
