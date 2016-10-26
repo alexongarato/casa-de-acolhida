@@ -3,7 +3,8 @@ var _animaTimeDef = 0.3;
 var _animaTimeSlow = 0.5;
 var _sections;
 var _currentPage = undefined;
-var _lockScroll = false;
+var _currentIndex = -1;
+// var _lockScroll = false;
 var _scrollTimeout = undefined;
 var Main = {
 	init:function()
@@ -15,11 +16,11 @@ var Main = {
 			var loader = document.getElementById("loader");
 			loader.setAttribute("class", "hidden");
 
-			console.info("App is ready.");
-
+			//esconde todas as seções
 			_sections = $("section");
-			_sections.css("opacity", 0);
+			_sections.css("visibility", "hidden");
 
+			//aplica imagem de fundo na seção parceiros
 			$("section#partners .container").each(function(i,e)
 			{
 				$(e).attr("style", "background-image:url("+$($(e).find("img")).attr("src")+")");
@@ -27,13 +28,15 @@ var Main = {
 
 			Main.onResizeHandler();
 			Main.EnableMainMenu();
-			// Main.ShowPage(0);
-			Main.onScrollHandler();
+			// Main.onScrollHandler();
+			Main.ShowPage(0);
+
+			console.info("App is ready.");
 		});
 
 		window.addEventListener("resize", Main.onResizeHandler);
-		window.addEventListener("scroll", Main.onScrollHandler);
-	},
+		// window.addEventListener("scroll", Main.onScrollHandler);
+	},/*
 	onScrollHandler:function()
 	{
 		if(_scrollTimeout)
@@ -63,7 +66,7 @@ var Main = {
 				}
 			});
 		}, 30);
-	},
+	},*/
 	onResizeHandler:function()
 	{
 		console.log("on resize");
@@ -77,8 +80,8 @@ var Main = {
 			{
 				var index = $(evt.currentTarget).index();
 				var newYPos = index == 0 ? 0 : $(_sections[index]).position().top;
-				TweenLite.to($(window), _animaTimeSlow, {scrollTo:{y:newYPos}, ease:Power2.easeInOut });
-				// Main.ShowPage($(this).index());
+				// TweenLite.to($(window), _animaTimeSlow, {scrollTo:{y:newYPos}, ease:Power2.easeInOut });
+				Main.ShowPage($(this).index());
 			});
 		});
 
@@ -95,7 +98,9 @@ var Main = {
 	},
 	ShowPage:function(index)
 	{
-		_lockScroll = true;
+		// _lockScroll = true;
+
+		//atualiza o status do menu principal.
 		$("body>nav>ul>li.active").removeClass("active");
 		$($("body>nav>ul>li")[index]).addClass("active");
 		$("header>h1").removeClass("big").addClass($($("body>nav>ul>li")[index]).data("logo"));
@@ -103,49 +108,45 @@ var Main = {
 		var newPage = $(_sections[index]);
 		var oldPage = _currentPage;
 
-		console.log(oldPage);
+		console.log("newPage:", newPage);
+		console.log("oldPage:", oldPage);
 
-		if(oldPage)
+		if(newPage.css("visibility") == "hidden")
 		{
-			if(oldPage.find(".anchor").length > 0)
+			var delay = Main.HidePage(oldPage, index);
+
+			if(newPage.find(".anchor").length > 0)
 			{
-				oldPage.find(".anchor").hide();
+				newPage.find(".anchor").show();
 			}
-		}
 
-		if(newPage.find(".anchor").length > 0)
-		{
-			newPage.find(".anchor").show();
-		}
+			$("body").attr('class', newPage.data("bg-class"));
 
-		$("body").attr('class', newPage.data("bg-class"));
-
-		if(newPage.css("opacity") == 0)
-		{
-			newPage.css("opacity", 1);
-			var delay = 0;
-			var ease = Back.easeOut;
-			var marginTop = 20;
+			TweenMax.to(newPage, 0, {visibility:"visible", delay:delay});
+			
+			var ease = Back.easeInOut;
+			var marginTop = index < _currentIndex ? -20 : 20;
 
 			//ativa o link de acao da pagina
 			newPage.find(".link").addClass("active");
-			//link de acao da pagina
 			TweenMax.set(newPage.find(".link"), {opacity:0, top:marginTop, position:"relative"});
-			//ancora indicadora de mais páginas abaixo
 			TweenMax.set(newPage.find(".anchor"), {opacity:0, bottom:-30});
+			
 			//anima a entrada do texto principal da pagina
 			newPage.find(".line").each(function(i,e)
 			{
-				delay += _animaTimeFast;
 				TweenMax.set(e, {opacity:0, top:marginTop, position:"relative"});
 				TweenMax.to(e, _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease});
+				delay += 0.05;
 			});
+			
 			//adiciona delay para entrada do link principal
 			delay += _animaTimeFast;
 			TweenMax.to(newPage.find(".link"), _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease, onComplete:function()
 			{
 				newPage.find(".link").removeClass("active");
 			}});
+
 			//adiciona delay para entrada da âncora
 			if(newPage.find(".anchor").length > 0)
 			{
@@ -153,10 +154,56 @@ var Main = {
 				delay += _animaTimeDef*4;
 				TweenMax.to(newPage.find(".anchor"), 0, {opacity:1, bottom:-10, delay:delay, clearProps:"all"});
 			}
-		}
 
-		_currentPage = newPage;
-	}/*,
+			_currentPage = newPage;
+			_currentIndex = index;
+		}
+	},
+	HidePage:function(oldPage, newIndex)
+	{
+		var delay = 0;
+
+		if(oldPage)
+		{
+			if(oldPage.find(".anchor").length > 0)
+			{
+				oldPage.find(".anchor").hide();
+			}
+			
+			var ease = Back.easeInOut;
+			var marginTop;
+			var total = oldPage.find(".line").length;
+
+			if(newIndex > _currentIndex)
+			{
+				marginTop = -20;
+				for(var i = 0; i < total; i++)
+				{
+					var e = $(oldPage.find(".line")[i]);
+					TweenMax.set(e, {position:"relative"});
+					TweenMax.to(e, _animaTimeDef, {opacity:0, top:marginTop, delay:delay, ease:ease});
+					delay += 0.05;
+				}
+			}
+			else
+			{
+				marginTop = 20;
+				for(var i = total; i >= 0; i--)
+				{
+					var e = $(oldPage.find(".line")[i]);
+					TweenMax.set(e, {position:"relative"});
+					TweenMax.to(e, _animaTimeDef, {opacity:0, top:marginTop, delay:delay, ease:ease});
+					delay += 0.05;
+				}
+			}
+
+			TweenMax.to(oldPage, 0, {visibility:"hidden", delay:delay});
+		}
+		// delay += 0.5;
+
+		return delay;
+	}
+	/*,
 	DissmissPage:function(targetObject, nextIndex)
 	{
 		console.log("Hidding old page...");

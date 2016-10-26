@@ -259,7 +259,7 @@ body
 
 	header
 	{
-		position: absolute;
+		position: fixed;
 	    width: 100%;
 	    height: auto;
 	    top: 0px;
@@ -697,7 +697,14 @@ body
 /* DESKTOP */
 @media only screen and (min-width: 768px)
 {
-	
+	body
+	{
+		overflow: hidden;
+		section
+		{
+			position: absolute;
+		}
+	}
 }
 
 /* SMALL SCREEN HEIGHT */
