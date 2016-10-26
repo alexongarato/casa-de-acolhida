@@ -4,7 +4,6 @@ var _animaTimeSlow = 0.5;
 var _sections;
 var _currentPage = undefined;
 var _currentIndex = -1;
-// var _lockScroll = false;
 var _scrollTimeout = undefined;
 var Main = {
 	init:function()
@@ -26,51 +25,11 @@ var Main = {
 				$(e).attr("style", "background-image:url("+$($(e).find("img")).attr("src")+")");
 			});
 
-			Main.onResizeHandler();
 			Main.EnableMainMenu();
-			// Main.onScrollHandler();
 			Main.ShowPage(0);
 
 			console.info("App is ready.");
 		});
-
-		window.addEventListener("resize", Main.onResizeHandler);
-		// window.addEventListener("scroll", Main.onScrollHandler);
-	},/*
-	onScrollHandler:function()
-	{
-		if(_scrollTimeout)
-		{
-			clearTimeout(_scrollTimeout);
-			_scrollTimeout = undefined;
-		}
-
-		_scrollTimeout = setTimeout(function()
-		{
-			console.log("test current page");
-			
-			var h = $(window).height() * 0.4;
-			var top = $(window).scrollTop() + h;
-			
-			var currSetionTop = 0;
-			var currSetionHeight = 0;
-			$("section").each(function(i,e)
-			{
-				currSetionTop = $(e).position().top;
-				currSetionHeight = $(e).height();
-				if(top >= currSetionTop && top <= (currSetionTop + currSetionHeight))
-				{
-					console.log('opened', i);
-					Main.ShowPage(i);
-					return;
-				}
-			});
-		}, 30);
-	},*/
-	onResizeHandler:function()
-	{
-		console.log("on resize");
-		_sections.css("min-height", $(window).height());
 	},
 	EnableMainMenu:function()
 	{
@@ -80,7 +39,6 @@ var Main = {
 			{
 				var index = $(evt.currentTarget).index();
 				var newYPos = index == 0 ? 0 : $(_sections[index]).position().top;
-				// TweenLite.to($(window), _animaTimeSlow, {scrollTo:{y:newYPos}, ease:Power2.easeInOut });
 				Main.ShowPage($(this).index());
 			});
 		});
@@ -91,15 +49,12 @@ var Main = {
 			$(e).click(function(e)
 			{
 				e.preventDefault();
-				//Main.ShowPage($(this).parents("section").index());
 				$("body>nav>ul>li")[index].click();
 			});
 		});
 	},
 	ShowPage:function(index)
 	{
-		// _lockScroll = true;
-
 		//atualiza o status do menu principal.
 		$("body>nav>ul>li.active").removeClass("active");
 		$($("body>nav>ul>li")[index]).addClass("active");
@@ -137,7 +92,7 @@ var Main = {
 			{
 				TweenMax.set(e, {opacity:0, top:marginTop, position:"relative"});
 				TweenMax.to(e, _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease});
-				delay += 0.05;
+				delay += 0.08;
 			});
 			
 			//adiciona delay para entrada do link principal
@@ -182,7 +137,7 @@ var Main = {
 					var e = $(oldPage.find(".line")[i]);
 					TweenMax.set(e, {position:"relative"});
 					TweenMax.to(e, _animaTimeDef, {opacity:0, top:marginTop, delay:delay, ease:ease});
-					delay += 0.05;
+					delay += 0.08;
 				}
 			}
 			else
@@ -193,28 +148,15 @@ var Main = {
 					var e = $(oldPage.find(".line")[i]);
 					TweenMax.set(e, {position:"relative"});
 					TweenMax.to(e, _animaTimeDef, {opacity:0, top:marginTop, delay:delay, ease:ease});
-					delay += 0.05;
+					delay += 0.08;
 				}
 			}
 
 			TweenMax.to(oldPage, 0, {visibility:"hidden", delay:delay});
 		}
-		// delay += 0.5;
 
 		return delay;
 	}
-	/*,
-	DissmissPage:function(targetObject, nextIndex)
-	{
-		console.log("Hidding old page...");
-		TweenMax.to(targetObject, _animaTimeFast, {marginTop:parseInt(targetObject.css("margin-top")) - 30, opacity:0, clearProps:"all", onComplete:function()
-		{
-			targetObject.hide();
-			
-			console.log("Calling new page...");
-			Main.ShowPage(nextIndex);
-		}});
-	}*/
 }
 
 Main.init();

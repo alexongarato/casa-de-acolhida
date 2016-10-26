@@ -72,6 +72,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 	vertical-align: middle;
 	margin-left: auto;
 	margin-right: auto;
+	padding-top: 5%;
 }
 
 .inner
@@ -259,11 +260,10 @@ body
 
 	header
 	{
-		position: fixed;
+		position: absolute;
 	    width: 100%;
-	    height: auto;
-	    top: 0px;
-	    left: 0px;
+	    height: 30%;
+	    max-height: 200px;
 	    /*z-index: 999999;
 	    background: $Yellow;
 		background: -moz-linear-gradient(top, rgba(235,178,63,1) 0%, rgba(235,178,63,1) 80%, rgba(235,178,63,0.28) 100%);
@@ -275,15 +275,16 @@ body
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebb23f', endColorstr='#ebb23f', GradientType=0 );*/
 		h1
 		{
+			position: relative;
 			@include transition(all $animaTimeDef);
 			background-size: contain !important;
-			width: 192px;
-			height: 140px;
+			width: auto;
+			height: 90%;
+			top: 5%;
 			text-indent: -9999em;
 			margin: 0px auto;
 		    margin-bottom: 0px;
-		    top: 63px;
-		    position: relative;
+		    
 		    pointer-events: none;
 
 			&.yellow
@@ -298,8 +299,7 @@ body
 
 			&.big
 			{
-				width: 317px;
-				height: 229px;	
+				
 			}
 		}
 	}
@@ -396,7 +396,7 @@ body
 		{
 			@extend .headline_font;
 			text-transform: uppercase;
-			margin-bottom: 75px;
+			margin-bottom: 30px;
 		}
 
 		a.link
@@ -410,7 +410,7 @@ body
 		{
 			.inner
 			{
-				margin-top: 10%;
+				margin-top: 5%;
 			}
 		}
 
@@ -418,7 +418,7 @@ body
 		{
 			.inner
 			{
-				margin-top: 10%;
+				margin-top: 2%;
 				.group
 				{
 					height: 95px;
@@ -476,12 +476,11 @@ body
 		{
 			.wrapper
 			{
-				vertical-align: top;
+				vertical-align: bottom;
 				.inner
 				{
-					margin-top: 230px;
-					max-width: 1180px;
-					padding: 0px 10% 0px 10%;
+					max-width: 1020px;
+					padding: 0px calc(10%) 0px calc(10%);
 					h1
 					{
 						font-size: 30px !important;
@@ -493,8 +492,12 @@ body
 						li
 						{
 							display: inline-block;
-							margin: 15px 15px 0px 15px;
+							margin: 1vh 1vw 0px 1vw;
 							cursor: pointer;
+							width: calc(20 * 1vw);
+							height: calc(20 * 1vh);
+							max-width: 140px;
+							max-height: 100px;
 							>span
 							{
 								top: -5px;
@@ -502,8 +505,8 @@ body
 							}
 							.container
 							{
-								width: 200px;
-								height: 150px;
+								width: 100%;
+								height: 100%;
 								background: $blackalpha;
 								@include border-radius(10px);
 								overflow: hidden;
@@ -681,6 +684,7 @@ body
 			ul
 			{
 				margin-right: 1vw !important;
+				min-width: 70px !important;
 
 				li
 				{
@@ -703,6 +707,7 @@ body
 		section
 		{
 			position: absolute;
+			visibility: hidden;
 		}
 	}
 }
@@ -714,50 +719,12 @@ body
 	{
 		header
 		{
-			h1
-			{
-				&.big
-				{
-					height: 150px !important;
-					margin-bottom: -20px !important;
-				}
-			}
+
 		}
 
 		section
 		{
-			&#place
-			{
-				.wrapper
-				{
-					h1
-					{
-						margin-bottom: 30px !important;
-					}
-				}
-			}
-
-			&#partners
-			{
-				.wrapper
-				{
-					.inner
-					{
-						max-width: 910px;
-						ul
-						{
-							li
-							{
-								.container
-								{
-									width: 140px !important;
-									height: 100px !important;
-								}
-							}
-						}
-					}
-				}
-			}
+			
 		}
 	}
 }
