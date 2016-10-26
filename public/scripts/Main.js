@@ -1,6 +1,4 @@
-var _animaTimeFast = 0.09;
-var _animaTimeDef = 0.3;
-var _animaTimeSlow = 0.5;
+var _animaTimeDef = 0.5;
 var _sections;
 var _currentPage = undefined;
 var _currentIndex = -1;
@@ -75,16 +73,17 @@ var Main = {
 				newPage.find(".anchor").show();
 			}
 
-			$("body").attr('class', newPage.data("bg-class"));
-
-			TweenMax.to(newPage, 0, {visibility:"visible", delay:delay});
+			TweenMax.to(newPage, 0, {visibility:"visible", delay:delay, onComplete:function()
+			{
+				$("body").attr('class', newPage.data("bg-class"));
+			}});
 			
 			var ease = Back.easeInOut;
-			var marginTop = index < _currentIndex ? -20 : 20;
+			var marginTop = index < _currentIndex ? -50 : 50;
 
 			//ativa o link de acao da pagina
 			newPage.find(".link").addClass("active");
-			TweenMax.set(newPage.find(".link"), {opacity:0, top:marginTop, position:"relative"});
+			TweenMax.set(newPage.find(".link"), {opacity:0, top:marginTop});
 			TweenMax.set(newPage.find(".anchor"), {opacity:0, bottom:-30});
 			
 			//anima a entrada do texto principal da pagina
@@ -96,7 +95,6 @@ var Main = {
 			});
 			
 			//adiciona delay para entrada do link principal
-			delay += _animaTimeFast;
 			TweenMax.to(newPage.find(".link"), _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease, onComplete:function()
 			{
 				newPage.find(".link").removeClass("active");
@@ -106,7 +104,7 @@ var Main = {
 			if(newPage.find(".anchor").length > 0)
 			{
 				newPage.find(".anchor").show();
-				delay += _animaTimeDef*4;
+				delay += _animaTimeDef;
 				TweenMax.to(newPage.find(".anchor"), 0, {opacity:1, bottom:-10, delay:delay, clearProps:"all"});
 			}
 
@@ -131,7 +129,7 @@ var Main = {
 
 			if(newIndex > _currentIndex)
 			{
-				marginTop = -20;
+				marginTop = -50;
 				for(var i = 0; i < total; i++)
 				{
 					var e = $(oldPage.find(".line")[i]);
@@ -142,7 +140,7 @@ var Main = {
 			}
 			else
 			{
-				marginTop = 20;
+				marginTop = 50;
 				for(var i = total; i >= 0; i--)
 				{
 					var e = $(oldPage.find(".line")[i]);
@@ -151,6 +149,8 @@ var Main = {
 					delay += 0.08;
 				}
 			}
+
+			delay += _animaTimeDef;
 
 			TweenMax.to(oldPage, 0, {visibility:"hidden", delay:delay});
 		}
