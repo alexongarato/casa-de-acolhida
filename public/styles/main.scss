@@ -196,7 +196,10 @@ a.link
 	background: $Pink;
 	display: block;
 	margin: 0px auto;
-	
+	content
+	{
+
+	}
 	b
 	{
 		font-style: italic !important;
@@ -410,9 +413,10 @@ body
 
 		a.link
 		{
-			width: 310px;
-			height: 80px;
-			line-height: 80px;
+			max-width: 310px;
+			max-height: 80px;
+			width: 31vh;
+			height: 8vh;
 		}
 
 		&#place
@@ -475,7 +479,10 @@ body
 					    display: inline-block;
 					    position: relative;
 					    margin-left: 0px;
-						margin-right: auto;
+						b
+						{
+							margin-left: auto;
+						}
 						.icon
 						{
 							margin: 25% auto;
