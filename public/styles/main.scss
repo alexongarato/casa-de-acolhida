@@ -32,7 +32,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 /*FONTS*/
 .subtitle_font
 {
-	font: 3.2vh/30px "WaskNewRegularItalic";
+	font: 30px "WaskNewRegularItalic";
 	b
 	{
 		font-family: "WaskNewBold";
@@ -41,7 +41,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 
 .headline_font
 {
-	font: 4.2vh/40px "WaskNewRegularItalic";
+	font: 40px "WaskNewRegularItalic";
 	font-style: italic;
 	line-height: 4.8vh;
 	b
@@ -58,7 +58,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 
 .bottomline_font
 {
-	font: 1.8vh/18px "WaskNewRegular";
+	font: 18px "WaskNewRegular";
 	font-style: normal;
 	b
 	{
@@ -226,6 +226,7 @@ body
 	background: $Yellow;
 	@include transition(background $animaTimeSlow, color $animaTimeDef);
 	/*background: url(../images/layout.png) right -70px no-repeat;*/
+	overflow: hidden;
 
 	#loader
 	{
@@ -337,7 +338,7 @@ body
 	    			color: $Black !important;
 	    			.label
 	    			{
-	    				font-size: 40px;
+	    				font-size: 4vh;
 	    			}
 
 	    			.icon
@@ -395,9 +396,10 @@ body
 		display: table;
 		width: 100%;
 		height: 100%;
-		position: relative;
 		z-index: 1;
 		@extend .bottomline_font;
+		position: absolute;
+		visibility: hidden;
 
 		h1
 		{
@@ -428,51 +430,55 @@ body
 				margin-top: 2%;
 				.group
 				{
-					height: 95px;
-					display: block;
+					height: auto;
+					display: flex;
 					.tag
 					{
 						color: $Yellow;
 						display: inline-block;
 					    text-transform: uppercase;
 					    text-align: center;
-					    line-height: 32px;
+					    line-height: 4.5vh;
 					    transform: rotate(-17deg);
-					    font-size: 40px;
-					    margin-right:20px; 
+					    font-size: 4vh;
+					    margin-right:10px; 
+					    margin-left: auto;
 					}
 					.currency
 					{
 						display: inline-block;
-						top: -10px;
 						position: relative;
 						margin-right:10px; 
+						margin-top: 10px;
 						b
 						{
-							font-size: 53px;
+							font-size: 5vh;
 						}
 					}
 					.field-container
 					{
-						display: inline-block;
-						width: 310px;
-						height: 82px;
-						position: relative;
-						top: -45px;
+					    display: inline-block;
+					    width: 30vw;
+					    height: 8.5vh;
+					    max-width: 310px;
+					    max-height: 82px;
+					    position: relative;
 						background: $blackalpha;
 						margin-right:10px; 
 					}
 					.link
 					{
-						width: 93px;
-						height: 82px;
-						display: inline-block;
-						position: relative;
-						top: -8px;
+						max-width: 93px;
+						max-height: 82px;
+						width: 9vh;
+					    height: 9vh;
+					    display: inline-block;
+					    position: relative;
+					    margin-left: 0px;
+						margin-right: auto;
 						.icon
 						{
-							margin-left: 0px !important;
-							top: 5px !important;
+							margin: 25% auto;
 						}
 					}
 				}
@@ -687,7 +693,7 @@ body
 }
 
 /* MOBILE */
-@media only screen and (max-width: 1364px)
+@media only screen and (max-width: 768px)
 {
 	body
 	{
@@ -711,32 +717,42 @@ body
 }
 
 /* DESKTOP */
-@media only screen and (min-width: 768px)
+@media only screen and (min-width: 768px) and (max-height: 768px)
 {
-	body
+	.subtitle_font
 	{
-		overflow: hidden;
-		section
+		font: 3.2vh/30px "WaskNewRegularItalic";
+		b
 		{
-			position: absolute;
-			visibility: hidden;
+			font-family: "WaskNewBold";
 		}
 	}
-}
 
-/* SMALL SCREEN HEIGHT */
-@media only screen and (max-height: 800px)
-{
-	body
+	.headline_font
 	{
-		header
+		font: 4.2vh/40px "WaskNewRegularItalic";
+		font-style: italic;
+		line-height: 4.8vh !important;
+		b
 		{
-
+			font-family: "WaskNewBold";
+			font-style: normal;
 		}
-
-		section
+		mark
 		{
-			
+			font-family: "WaskNewBold";
+			font-style: normal;
+		}
+	}
+
+	.bottomline_font
+	{
+		font: 1.8vh/18px "WaskNewRegular";
+		font-style: normal;
+		b
+		{
+			font-family: "WaskNewBold";
+			font-style: normal;
 		}
 	}
 }
