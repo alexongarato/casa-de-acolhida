@@ -1,5 +1,5 @@
 # Casa de Acolhida Non-profit Organization
-Volunteer project
+Official Institutional Website - Volunteer project
 
 ## Volunteers
 * [Alex Ongarato - Full Stack](http://www.linkedin.com/in/alexongarato)
