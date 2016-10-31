@@ -16,7 +16,7 @@ var Main = {
 			_sections.css("visibility", "hidden");
 
 			//aplica imagem de fundo na seção parceiros
-			$("section#partners .container").each(function(i,e)
+			$("section#parceiros .container").each(function(i,e)
 			{
 				$(e).attr("style", "background-image:url("+$($(e).find("img")).attr("src")+")");
 			});
