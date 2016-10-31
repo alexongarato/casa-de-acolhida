@@ -1,4 +1,5 @@
 var _animaTimeDef = 0.5;
+var _animaTimeFast = 0.25;
 var _sections;
 var _currentPage = undefined;
 var _currentIndex = -1;
@@ -8,7 +9,7 @@ var Main = {
 	{
 		console.info("Starting app...");
 
-		window.addEventListener("load", function () 
+		window.addEventListener("load", function ()
 		{
 			var loader = document.getElementById("loader");
 			loader.setAttribute("class", "hidden");
@@ -24,7 +25,27 @@ var Main = {
 			});
 
 			Main.EnableMainMenu();
-			Main.ShowPage(0);
+
+			var targetSection = 0;
+			switch (window.location.hash)
+			{
+				case "#doacoes":
+				targetSection = 1;
+				break;
+				case "#parceiros":
+				targetSection = 2;
+				break;
+				case "#transparencia":
+				targetSection = 3;
+				break;
+				case "#contato":
+				targetSection = 4;
+				break;
+				default:
+				targetSection = 0;
+			}
+
+			Main.ShowPage(targetSection);
 
 			console.info("App is ready.");
 		});
@@ -73,27 +94,41 @@ var Main = {
 				newPage.find(".anchor").show();
 			}
 
-			TweenMax.to(newPage, 0, {visibility:"visible", delay:delay, onComplete:function()
+			TweenMax.to(newPage, 0, {opacity:1, visibility:"visible", delay:delay, onComplete:function()
 			{
 				$("body").attr('class', newPage.data("bg-class"));
 			}});
-			
+
 			var ease = Back.easeInOut;
-			var marginTop = index < _currentIndex ? -50 : 50;
+			var marginTop = index < _currentIndex ? -20 : 20;
 
 			//ativa o link de acao da pagina
 			newPage.find(".link").addClass("active");
 			TweenMax.set(newPage.find(".link"), {opacity:0, top:marginTop});
 			TweenMax.set(newPage.find(".anchor"), {opacity:0, bottom:-20});
-			
-			//anima a entrada do texto principal da pagina
-			newPage.find(".line").each(function(i,e)
+
+			if(index > _currentIndex)
 			{
-				TweenMax.set(e, {opacity:0, top:marginTop, position:"relative"});
-				TweenMax.to(e, _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease});
-				delay += 0.08;
-			});
-			
+				//anima a entrada do texto principal da pagina
+				newPage.find(".line").each(function(i,e)
+				{
+					TweenMax.set(e, {opacity:0, top:marginTop, position:"relative"});
+					TweenMax.to(e, _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease});
+					delay += 0.08;
+				});
+			}
+			else
+			{
+				var total = newPage.find(".line").length;
+				for(var i = total; i >= 0; i--)
+				{
+					var e = $(newPage.find(".line")[i]);
+					TweenMax.set(e, {opacity:0, top:marginTop, position:"relative"});
+					TweenMax.to(e, _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease});
+					delay += 0.08;
+				}
+			}
+
 			//adiciona delay para entrada do link principal
 			TweenMax.to(newPage.find(".link"), _animaTimeDef, {opacity:1, top:0, delay:delay, clearProps:"all", ease:ease, onComplete:function()
 			{
@@ -122,7 +157,7 @@ var Main = {
 			{
 				oldPage.find(".anchor").hide();
 			}
-			
+
 			var ease = Back.easeInOut;
 			var marginTop;
 			var total = oldPage.find(".line").length;
@@ -135,7 +170,7 @@ var Main = {
 					var e = $(oldPage.find(".line")[i]);
 					TweenMax.set(e, {position:"relative"});
 					TweenMax.to(e, _animaTimeDef, {opacity:0, top:marginTop, delay:delay, ease:ease});
-					delay += 0.08;
+					delay += 0.05;
 				}
 			}
 			else
@@ -146,13 +181,16 @@ var Main = {
 					var e = $(oldPage.find(".line")[i]);
 					TweenMax.set(e, {position:"relative"});
 					TweenMax.to(e, _animaTimeDef, {opacity:0, top:marginTop, delay:delay, ease:ease});
-					delay += 0.08;
+					delay += 0.05;
 				}
 			}
 
-			delay += _animaTimeDef;
+			TweenMax.to(oldPage, _animaTimeFast, {opacity:0, delay:delay, onComplete:function()
+			{
+				TweenMax.set(oldPage, {visibility:"hidden"});
+			}});
 
-			TweenMax.to(oldPage, 0, {visibility:"hidden", delay:delay});
+			delay += 0.05;
 		}
 
 		return delay;

@@ -10,6 +10,7 @@ $Yellow: #ebb23f;
 $DarkYellow: #c59f43;
 $Pink: #e55c67;
 $DarkPink: #af595d;
+$lightPink: #ef8d96;
 $Black: #303030;
 $White: #fff;
 $wrapperWidth: 700px;
@@ -80,7 +81,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 {
 	max-width: $wrapperWidth;
 	margin-left: auto;
-    margin-right: auto; 
+	margin-right: auto;
 }
 
 mark
@@ -100,18 +101,18 @@ mark
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 	animation-name: heartBeat;
-	animation-duration: $animaTimeSlow;
-	@keyframes heartBeat 
+	animation-duration: $animaTimeDef;
+	@keyframes heartBeat
 	{
-	  from 
-	  {
-	    transform: scale(1);
-	  }
+		from
+		{
+			transform: scale(1);
+		}
 
-	  to 
-	  {
-	    transform: scale(1.2);
-	  }
+		to
+		{
+			transform: scale(1.2);
+		}
 	}
 }
 
@@ -121,32 +122,32 @@ mark
 	animation-direction: alternate;
 	animation-name: yoyoV;
 	animation-duration: $animaTimeSlow;
-	@keyframes yoyoV 
+	@keyframes yoyoV
 	{
-	  from 
-	  {
-	    top: 0px;
-	  }
+		from
+		{
+			top: 0px;
+		}
 
-	  to 
-	  {
-	    top: 5px;
-	  }
+		to
+		{
+			top: 5px;
+		}
 	}
 }
 
 .shadowButton
 {
-	@include border-radius(15px);
-	@include box-shadow(0px 20px 50px 0px rgba(0, 0, 0, 0.25));
+	@include border-radius(1.4vh);
+	@include box-shadow(0 2vh 5vh 0 rgba(0, 0, 0, 0.25));
 	@include transition(background $animaTimeDef, transform $animaTimeDef, box-shadow $animaTimeDef);
 	transform: scale(1);
-	
+
 	&:hover, &.hover
 	{
-		@include box-shadow(0px 10px 30px 0px rgba(0, 0, 0, 0.2));
+		@include box-shadow(0 1vh 3vh 0 rgba(0, 0, 0, 0.2));
 		transform: scale(0.99);
-		
+
 		.icon-heart
 		{
 			@extend .heartBeatAnima;
@@ -155,14 +156,14 @@ mark
 
 	&:active, &.active
 	{
-		@include box-shadow(0px 0px 0px 0px rgba(0, 0, 0, 0));
+		@include box-shadow(0 0 0 0 rgba(0, 0, 0, 0));
 		transform: scale(0.98);
 	}
 }
 
 .anchor
 {
-	@include border-radius(15px 15px 0 0);
+	@include border-radius(1.5vh 1.5vh 0 0);
 	@include transition(bottom $animaTimeDef, background $animaTimeDef);
 	transition-timing-function: cubic-bezier(0, 0.74, 0.39, 1.39);
 	max-width: 122px;
@@ -175,7 +176,7 @@ mark
 	margin-left: -6vh;
 	z-index: 10000;
 	&:hover
-	{	
+	{
 		bottom: 0px;
 		.icon-arrow
 		{
@@ -200,15 +201,15 @@ a.link
 	margin: 0px auto;
 	.content
 	{
-	    display: block;
-	    position: relative;
-	    top: 1.5vh;
+		display: block;
+		position: relative;
+		top: 1.5vh;
 	}
 	b
 	{
 		font-style: italic !important;
 	}
-	
+
 	.icon
 	{
 		display: inline-flex;
@@ -249,7 +250,7 @@ body
 		@include transition(all $animaTimeFast);
 		p
 		{
-		    top: 45%;
+			top: 45%;
 			position: relative;
 		}
 
@@ -275,12 +276,12 @@ body
 	header
 	{
 		position: absolute;
-	    width: 100%;
-        height: 30vh;
+		width: 100%;
+		height: 30vh;
 		max-height: 280px;
 		top: calc(5vh - 1%);
-	    /*z-index: 999999;
-	    background: $Yellow;
+		/*z-index: 999999;
+		background: $Yellow;
 		background: -moz-linear-gradient(top, rgba(235,178,63,1) 0%, rgba(235,178,63,1) 80%, rgba(235,178,63,0.28) 100%);
 		background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(235,178,63,1)), color-stop(80%, rgba(235,178,63,1)), color-stop(100%, rgba(235,178,63,0.28)));
 		background: -webkit-linear-gradient(top, rgba(235,178,63,1) 0%, rgba(235,178,63,1) 80%, rgba(235,178,63,0.28) 100%);
@@ -298,9 +299,9 @@ body
 			top: 5%;
 			text-indent: -9999em;
 			margin: 0px auto;
-		    margin-bottom: 0px;
-		    
-		    pointer-events: none;
+			margin-bottom: 0px;
+
+			pointer-events: none;
 
 			&.yellow
 			{
@@ -314,7 +315,7 @@ body
 
 			&.big
 			{
-				
+
 			}
 		}
 	}
@@ -322,79 +323,79 @@ body
 	>nav
 	{
 		position: fixed;
-	    height: 430px;
-	    right: 0px;
-	    top: calc(50% - 215px);
-	    overflow: hidden;
-	    z-index: 9999;
-	    ul
-	    {
-	    	min-width: 250px;
-		    margin-top: 30px;
-		    margin-right: $rightMargin;
-	    	li
-	    	{
-	    		cursor: pointer;
-	    		font: 30px "WaskNewRegular";
-	    		color: $DarkYellow;
-	    		text-align: right;
-	    		margin-bottom: 14px;
-	    		@include transition(color $animaTimeDef);
-	    		&.active, &:hover
-	    		{
-	    			color: $Black !important;
-	    			.label
-	    			{
-	    				font-size: 4vh;
-	    			}
+		height: 430px;
+		right: 0px;
+		top: calc(50% - 215px);
+		overflow: hidden;
+		z-index: 9999;
+		ul
+		{
+			min-width: 250px;
+			margin-top: 30px;
+			margin-right: $rightMargin;
+			li
+			{
+				cursor: pointer;
+				font: 30px "WaskNewRegular";
+				color: $DarkYellow;
+				text-align: right;
+				margin-bottom: 14px;
+				@include transition(color $animaTimeDef);
+				&.active, &:hover
+				{
+					color: $Black !important;
+					.label
+					{
+						font-size: 4vh;
+					}
 
-	    			.icon
-		    		{
-		    			width: 60px;
-		    			background: $Pink;
-		    			transform: scale(1);
-		    		}
-	    		}
+					.icon
+					{
+						width: 60px;
+						background: $Pink;
+						transform: scale(1);
+					}
+				}
 
-	    		.label, .icon
-	    		{
-	    			display: inline-block;
-	    			vertical-align: top;
-	    			position: relative;
-	    			@include transition(font-size $animaTimeDef);
-	    		}
+				.label, .icon
+				{
+					display: inline-block;
+					vertical-align: top;
+					position: relative;
+					@include transition(font-size $animaTimeDef);
+				}
 
-	    		.label
-	    		{
-	    			line-height: 60px;
-	    			letter-spacing: -1px;
-	    		}
-
-	    		.icon
-	    		{
-	    			width: 60px;
-	    			height: 60px;
-	    			margin-left: 10px;
-	    			text-align: center;
+				.label
+				{
 					line-height: 60px;
-	    			@include border-radius(7px);
-	    			transform: scale(0.95);
-	    			@include transition(background $animaTimeSlow, transform $animaTimeDef);
-	    		}
-	    	}
-	    }
-	    
-	    .menu_circle
-	    {
-	    	@include transition(transform $animaTimeVerySlow);
-	    	transition-timing-function: ease-in-out;
-	    	transform: rotate(0deg);
-	    	color: red;
-	    	right: -657px;
-		    position: absolute;
-		    top: -150px;
-		    opacity: 0.3;
-	    }
+					letter-spacing: -1px;
+				}
+
+				.icon
+				{
+					width: 60px;
+					height: 60px;
+					margin-left: 10px;
+					text-align: center;
+					line-height: 60px;
+					@include border-radius(7px);
+					transform: scale(0.95);
+					@include transition(background $animaTimeSlow, transform $animaTimeDef);
+				}
+			}
+		}
+
+		.menu_circle
+		{
+			@include transition(transform $animaTimeVerySlow);
+			transition-timing-function: ease-in-out;
+			transform: rotate(0deg);
+			color: red;
+			right: -657px;
+			position: absolute;
+			top: -150px;
+			opacity: 0.3;
+		}
 	}
 
 	section
@@ -444,19 +445,19 @@ body
 					{
 						color: $Yellow;
 						display: inline-block;
-					    text-transform: uppercase;
-					    text-align: center;
-					    line-height: 4.5vh;
-					    transform: rotate(-17deg);
-					    font-size: 4vh;
-					    margin-right:10px; 
-					    margin-left: auto;
+						text-transform: uppercase;
+						text-align: center;
+						line-height: 4.5vh;
+						transform: rotate(-17deg);
+						font-size: 4vh;
+						margin-right:10px;
+						margin-left: auto;
 					}
 					.currency
 					{
 						display: inline-block;
 						position: relative;
-						margin-right:10px; 
+						margin-right:10px;
 						margin-top: 10px;
 						b
 						{
@@ -465,24 +466,24 @@ body
 					}
 					.field-container
 					{
-					    display: inline-block;
-					    width: 30vw;
-					    height: 8.5vh;
-					    max-width: 310px;
-					    max-height: 82px;
-					    position: relative;
+						display: inline-block;
+						width: 30vw;
+						height: 8.5vh;
+						max-width: 310px;
+						max-height: 82px;
+						position: relative;
 						background: $blackalpha;
-						margin-right:10px; 
+						margin-right:10px;
 					}
 					.link
 					{
 						max-width: 93px;
 						max-height: 82px;
 						width: 9vh;
-					    height: 9vh;
-					    display: inline-block;
-					    position: relative;
-					    margin-left: 0px;
+						height: 9vh;
+						display: inline-block;
+						position: relative;
+						margin-left: 0px;
 						b
 						{
 							margin-left: auto;
@@ -507,7 +508,7 @@ body
 					{
 						font-size: 3.7vh !important;
 						text-transform: none !important;
-					    margin-bottom: 2vh !important;
+						margin-bottom: 2vh !important;
 						margin-top: 2vh;
 					}
 					ul
@@ -515,17 +516,17 @@ body
 						li
 						{
 							display: inline-block;
-						    margin: 1.5vh 2vh 0 2vh;
-						    cursor: pointer;
-						    width: 9vw;
-						    height: 11vh;
-						    max-width: 140px;
-						    max-height: 100px;
+							margin: 2vh 2vh 5vh 2vh;
+							cursor: pointer;
+							width: 9vw;
+							height: 11vh;
+							max-width: 140px;
+							max-height: 100px;
 							>span
 							{
 								top: -5px;
-	    						position: relative;
-	    						font-size: 2.5vh;
+								position: relative;
+								font-size: 2.5vh;
 							}
 							.container
 							{
@@ -537,11 +538,11 @@ body
 								padding: 0px;
 								background-size: cover;
 								background-position: center center;
-								
+
 								-webkit-filter: grayscale(100%);
-							    filter: grayscale(100%);
-							    -webkit-transition: .3s ease-in-out;
-							    transition: .3s ease-in-out;
+								filter: grayscale(100%);
+								-webkit-transition: .3s ease-in-out;
+								transition: .3s ease-in-out;
 							}
 							img
 							{
@@ -551,19 +552,19 @@ body
 							}
 							.link
 							{
-							    width: 6vh;
-    							height: 6vh;
-							    position: relative;
-							    right: -3vw;
-							    margin-top: -3vh;
-							    max-width: 50px;
-							    max-height: 50px;
+								width: 6vh;
+								height: 6vh;
+								position: relative;
+								right: -3vw;
+								margin-top: -3vh;
+								max-width: 50px;
+								max-height: 50px;
 								.icon
 								{
 									display: block !important;
 									margin-left: 0px !important;
-								    top: 0.5vh !important;
-    								font-size: 4vh;
+									top: 1.2vh !important;
+									font-size: 3vh;
 								}
 							}
 
@@ -593,13 +594,21 @@ body
 				{
 					@extend .subtitle_font;
 					color: white !important;
+					margin-top: 10vh;
 				}
 
 				.container
 				{
 					background: $blackalpha;
-					@include border-radius(10px);
-					padding: 10px;
+					@include border-radius(1vh);
+					padding: 1vh;
+					max-width: 768px;
+					max-height: 350px;
+					width: 76vw;
+					height: 35vh;
+					margin: 0 auto;
+					color: white;
+					overflow: hidden;
 
 					ul
 					{
@@ -607,15 +616,16 @@ body
 						{
 							.label
 							{
-
+								@extend .subtitle_font;
 							}
 
 							.value
 							{
-
+								color: $lightPink;
+								font: 5vh "WaskNewRegular";
 							}
 						}
-					} 
+					}
 				}
 			}
 		}
@@ -626,12 +636,12 @@ body
 			{
 				@extend .subtitle_font;
 			}
-			
+
 			form
 			{
 				.textarea
 				{
-					
+
 				}
 			}
 		}
@@ -640,8 +650,8 @@ body
 	footer
 	{
 		position: fixed;
-	    bottom: 1vw;
-	    right: $rightMargin;
+		bottom: 1vw;
+		right: $rightMargin;
 		p
 		{
 			color: $DarkYellow;
@@ -666,7 +676,7 @@ body
 			background: linear-gradient(to bottom, rgba(229,92,103,1) 0%, rgba(229,92,103,1) 80%, rgba(229,92,103,0.28) 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e55c67', endColorstr='#e55c67', GradientType=0 );*/
 		}
-		
+
 		nav
 		{
 			ul
@@ -684,7 +694,7 @@ body
 				}
 			}
 		}
-		
+
 
 		.anchor, .link, mark
 		{
@@ -740,12 +750,22 @@ body
 					margin-right: 10%;
 				}
 			}
-				
+
+			&#transfer
+			{
+				.wrapper
+				{
+					.container
+					{
+						margin-left: 1vw;
+					}
+				}
+			}
 		}
 	}
 }
 
-/* PARTNERS */
+/* INTERMEDIATE */
 @media only screen and (min-width: 1080px)
 {
 	body
@@ -769,40 +789,4 @@ body
 /* DESKTOP */
 @media only screen and (min-width: 768px)
 {
-	/*.subtitle_font
-	{
-		font: 30px "WaskNewRegularItalic";
-		b
-		{
-			font-family: "WaskNewBold";
-		}
-	}
-
-	.headline_font
-	{
-		font: 39px "WaskNewRegularItalic";
-		font-style: italic;
-		line-height: 4.8vh !important;
-		b
-		{
-			font-family: "WaskNewBold";
-			font-style: normal;
-		}
-		mark
-		{
-			font-family: "WaskNewBold";
-			font-style: normal;
-		}
-	}
-
-	.bottomline_font
-	{
-		font: 18px "WaskNewRegular";
-		font-style: normal;
-		b
-		{
-			font-family: "WaskNewBold";
-			font-style: normal;
-		}
-	}*/
 }
