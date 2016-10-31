@@ -32,7 +32,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 /*FONTS*/
 .subtitle_font
 {
-	font: 30px "WaskNewRegularItalic";
+	font: 3.2vh "WaskNewRegularItalic";
 	b
 	{
 		font-family: "WaskNewBold";
@@ -41,7 +41,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 
 .headline_font
 {
-	font: 40px "WaskNewRegularItalic";
+	font: 4.2vh "WaskNewRegularItalic";
 	font-style: italic;
 	line-height: 4.8vh;
 	b
@@ -58,7 +58,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 
 .bottomline_font
 {
-	font: 18px "WaskNewRegular";
+	font: 1.8vh "WaskNewRegular";
 	font-style: normal;
 	b
 	{
@@ -165,12 +165,14 @@ mark
 	@include border-radius(15px 15px 0 0);
 	@include transition(bottom $animaTimeDef, background $animaTimeDef);
 	transition-timing-function: cubic-bezier(0, 0.74, 0.39, 1.39);
-	width: 122px;
-	height: 80px;
+	max-width: 122px;
+	max-height: 80px;
+	width: 12vh;
+	height: 8vh;
 	position: fixed;
 	bottom: -10px;
 	background: $Pink;
-	margin-left: -61px;
+	margin-left: -6vh;
 	z-index: 10000;
 	&:hover
 	{	
@@ -196,9 +198,11 @@ a.link
 	background: $Pink;
 	display: block;
 	margin: 0px auto;
-	content
+	.content
 	{
-
+	    display: block;
+	    position: relative;
+	    top: 1.5vh;
 	}
 	b
 	{
@@ -500,7 +504,6 @@ body
 				.inner
 				{
 					max-width: 1020px;
-					padding: 0px calc(10%) 0px calc(10%);
 					h1
 					{
 						font-size: 3.7vh !important;
@@ -699,8 +702,8 @@ body
 	}
 }
 
-/* MOBILE */
-@media only screen and (max-width: 768px)
+/* MAIN MENU */
+@media only screen and (max-width: 1470px)
 {
 	body
 	{
@@ -720,7 +723,26 @@ body
 				}
 			}
 		}
+
+		section
+		{
+			.wrapper
+			{
+				.inner
+				{
+					margin-left: 10%;
+					margin-right: 10%;
+				}
+			}
+				
+		}
 	}
+}
+
+/* MOBILE */
+@media only screen and (max-width: 768px)
+{
+	
 }
 
 /* DESKTOP */
@@ -728,7 +750,7 @@ body
 {
 	.subtitle_font
 	{
-		font: 3.2vh/30px "WaskNewRegularItalic";
+		font: 30px "WaskNewRegularItalic";
 		b
 		{
 			font-family: "WaskNewBold";
@@ -737,7 +759,7 @@ body
 
 	.headline_font
 	{
-		font: 4.2vh/40px "WaskNewRegularItalic";
+		font: 39px "WaskNewRegularItalic";
 		font-style: italic;
 		line-height: 4.8vh !important;
 		b
@@ -754,7 +776,7 @@ body
 
 	.bottomline_font
 	{
-		font: 1.8vh/18px "WaskNewRegular";
+		font: 18px "WaskNewRegular";
 		font-style: normal;
 		b
 		{

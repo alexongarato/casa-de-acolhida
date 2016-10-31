@@ -84,7 +84,7 @@ var Main = {
 			//ativa o link de acao da pagina
 			newPage.find(".link").addClass("active");
 			TweenMax.set(newPage.find(".link"), {opacity:0, top:marginTop});
-			TweenMax.set(newPage.find(".anchor"), {opacity:0, bottom:-30});
+			TweenMax.set(newPage.find(".anchor"), {opacity:0, bottom:-20});
 			
 			//anima a entrada do texto principal da pagina
 			newPage.find(".line").each(function(i,e)
