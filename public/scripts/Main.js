@@ -7,13 +7,10 @@ var _scrollTimeout = undefined;
 var Main = {
 	init:function()
 	{
-		console.info("Starting app...");
+		console.info("Loading app...");
 
 		window.addEventListener("load", function ()
 		{
-			var loader = document.getElementById("loader");
-			loader.setAttribute("class", "hidden");
-
 			//esconde todas as seções
 			_sections = $("section");
 			_sections.css("visibility", "hidden");
@@ -24,34 +21,47 @@ var Main = {
 				$(e).attr("style", "background-image:url("+$($(e).find("img")).attr("src")+")");
 			});
 
-			Main.EnableMainMenu();
-
 			var targetSection = 0;
 			switch (window.location.hash)
 			{
-				case "#doacoes":
+				case "#a-casa":
 				targetSection = 1;
 				break;
-				case "#parceiros":
+				case "#doacoes":
 				targetSection = 2;
 				break;
-				case "#transparencia":
+				case "#parceiros":
 				targetSection = 3;
 				break;
-				case "#contato":
+				case "#transparencia":
 				targetSection = 4;
+				break;
+				case "#contato":
+				targetSection = 5;
 				break;
 				default:
 				targetSection = 0;
 			}
 
-			Main.ShowPage(targetSection);
+			Main.EnableMainMenu(2);
+			Main.ShowPage(targetSection, 1);
+
+			TweenMax.delayedCall(1, function()
+			{
+				var loader = document.getElementById("loader");
+				loader.setAttribute("class", "hidden");
+			});
 
 			console.info("App is ready.");
 		});
 	},
-	EnableMainMenu:function()
+	EnableMainMenu:function(delay)
 	{
+		var ease = Back.easeInOut;
+
+		TweenMax.set($("body>nav"), {opacity:0});
+		TweenMax.to($("body>nav"), _animaTimeDef, {opacity:1, visibility:"visible", delay});
+
 		$("body>nav>ul>li").each(function(i,e)
 		{
 			$(e).click(function(evt)
@@ -60,6 +70,10 @@ var Main = {
 				var newYPos = index == 0 ? 0 : $(_sections[index]).position().top;
 				Main.ShowPage($(this).index());
 			});
+
+			TweenMax.set(e, {opacity:0, visibility:"visible", position:"relative", right: -60});
+			TweenMax.to(e, _animaTimeDef*2, {opacity:1, right: 0, clearProps:"all", delay:delay, ease:ease});
+			delay += 0.05;
 		});
 
 		$("section .anchor").each(function(i,e)
@@ -72,7 +86,7 @@ var Main = {
 			});
 		});
 	},
-	ShowPage:function(index)
+	ShowPage:function(index, delay = 0)
 	{
 		//atualiza o status do menu principal.
 		$("body>nav>ul>li.active").removeClass("active");
@@ -87,7 +101,7 @@ var Main = {
 
 		if(newPage.css("visibility") == "hidden")
 		{
-			var delay = Main.HidePage(oldPage, index);
+			delay += Main.HidePage(oldPage, index);
 
 			if(newPage.find(".anchor").length > 0)
 			{
