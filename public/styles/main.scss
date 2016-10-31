@@ -41,7 +41,7 @@ $blackalpha:rgba(30, 30, 30, 0.10);
 
 .headline_font
 {
-	font: 4.2vh "WaskNewRegularItalic";
+	font: 3.9vh "WaskNewRegularItalic";
 	font-style: italic;
 	line-height: 4.8vh;
 	b
@@ -503,7 +503,6 @@ body
 				vertical-align: middle;
 				.inner
 				{
-					max-width: 1020px;
 					h1
 					{
 						font-size: 3.7vh !important;
@@ -723,7 +722,14 @@ body
 				}
 			}
 		}
+	}
+}
 
+/* MOBILE */
+@media only screen and (max-width: 768px)
+{
+	body
+	{
 		section
 		{
 			.wrapper
@@ -739,16 +745,31 @@ body
 	}
 }
 
-/* MOBILE */
-@media only screen and (max-width: 768px)
+/* PARTNERS */
+@media only screen and (min-width: 1080px)
 {
-	
+	body
+	{
+		section
+		{
+			&#partners
+			{
+				.wrapper
+				{
+					.inner
+					{
+						max-width: 1020px !important;
+					}
+				}
+			}
+		}
+	}
 }
 
 /* DESKTOP */
-@media only screen and (min-width: 768px) and (max-height: 768px)
+@media only screen and (min-width: 768px)
 {
-	.subtitle_font
+	/*.subtitle_font
 	{
 		font: 30px "WaskNewRegularItalic";
 		b
@@ -783,5 +804,5 @@ body
 			font-family: "WaskNewBold";
 			font-style: normal;
 		}
-	}
+	}*/
 }
