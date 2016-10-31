@@ -520,7 +520,7 @@ body
 				vertical-align: middle;
 				.inner
 				{
-					h1
+					h2
 					{
 						font-size: 3.7vh !important;
 						text-transform: none !important;
@@ -606,7 +606,7 @@ body
 		{
 			.wrapper
 			{
-				h1
+				h2
 				{
 					@extend .subtitle_font;
 					color: white !important;
@@ -655,7 +655,7 @@ body
 				{
 					max-width: 900px;
 					width: 90vw;
-					h1
+					h2
 					{
 						@extend .subtitle_font;
 						font-size: 3vh;
