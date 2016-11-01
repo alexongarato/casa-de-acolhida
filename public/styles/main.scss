@@ -369,7 +369,7 @@ body
 				text-align: right;
 				margin-bottom: 14px;
 				@include transition(color $animaTimeDef);
-				&.active, &:hover
+				&.active
 				{
 					color: $Black !important;
 					.label
@@ -726,7 +726,7 @@ body
 				li
 				{
 					color: $DarkPink;
-					&:hover, &.active
+					&.active
 					{
 						.icon
 						{
